@@ -1,0 +1,12 @@
+node_modules/
+dist/
+data/
+data_model/
+data_model_v4_backup_*/
+data_model_v5/
+*.log
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store

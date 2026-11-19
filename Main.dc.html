@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MineWatch — National overview</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#17181A}a:hover{color:#000}
+button,input,select{font:inherit;color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #2F5BD3;outline-offset:1px}
+.mw-range{position:absolute;left:0;top:0;width:100%;height:26px;margin:0;background:transparent;pointer-events:none;-webkit-appearance:none;appearance:none}
+.mw-range::-webkit-slider-runnable-track{background:transparent;height:26px}
+.mw-range::-moz-range-track{background:transparent}
+.mw-range::-webkit-slider-thumb{pointer-events:auto;-webkit-appearance:none;width:12px;height:26px;background:#17181A;border:2px solid #FFFFFF;border-radius:2px;cursor:ew-resize;box-sizing:border-box}
+.mw-range::-moz-range-thumb{pointer-events:auto;width:8px;height:22px;background:#17181A;border:2px solid #FFFFFF;border-radius:2px;cursor:ew-resize}
+.mw-scroll{scrollbar-width:thin;scrollbar-color:#CFCFCA transparent}
+</style>
+</helmet>
+<div id="top" style="display: flex; flex-wrap: wrap; min-height: 100vh; background: #F3F3F1; color: #17181A; font-family: Inter, system-ui, sans-serif; font-size: 13px; line-height: 1.35; font-feature-settings: 'cv11', 'ss01'">
+
+  <!-- SIDEBAR -->
+  <nav aria-label="Primary" style="flex: 0 0 {{sideW}}px; display: flex; flex-direction: column; background: #FAFAF8; border-right: 1px solid #E2E2DE; min-width: 0">
+    <div style="height: 56px; display: flex; align-items: center; gap: 10px; padding: 0 18px; border-bottom: 1px solid #E2E2DE">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" style="flex: none"><rect x="1" y="1" width="20" height="20" rx="3" fill="#17181A"></rect><path d="M5.5 15.5 L9.2 8.5 L11.8 12.8 L13.6 10 L16.5 15.5" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><circle cx="15.4" cy="6.6" r="1.3" fill="#FFFFFF"></circle></svg>
+      <sc-if value="{{expanded}}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; line-height: 1.1">
+          <span style="font-size: 15px; font-weight: 700; letter-spacing: -0.015em">MineWatch</span>
+          <span style="font-size: 10.5px; color: #5F6368; letter-spacing: 0.02em">Satgas PETI · Nasional</span>
+        </div>
+      </sc-if>
+    </div>
+    <div style="padding: 14px 0 6px; display: flex; flex-direction: column; gap: 2px">
+      <sc-if value="{{expanded}}" hint-placeholder-val="{{ true }}">
+        <div style="padding: 0 18px 6px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; color: #6B6E73">WORKSPACE</div>
+      </sc-if>
+      <sc-for list="{{navItems}}" as="n" hint-placeholder-count="5">
+        <a href="{{n.href}}" aria-current="{{n.current}}" title="{{n.label}}" style="position: relative; display: flex; align-items: center; gap: 11px; height: 36px; padding: 0 {{n.padR}}px 0 {{n.padL}}px; justify-content: {{n.justify}}; text-decoration: none; color: {{n.color}}; font-weight: {{n.weight}}; background: {{n.bg}}">
+          <span aria-hidden="true" style="position: absolute; left: 0; top: 6px; bottom: 6px; width: 3px; background: #17181A; opacity: {{n.barOp}}"></span>
+          <svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><path d="{{n.icon}}" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <sc-if value="{{n.showLabel}}" hint-placeholder-val="{{ true }}">
+            <span style="flex: 1; white-space: nowrap">{{n.label}}</span>
+          </sc-if>
+          <sc-if value="{{n.showBadge}}" hint-placeholder-val="{{ false }}">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; font-weight: 600; padding: 1px 6px; border-radius: 3px; background: #E4E4E0; color: #2B2D31">{{n.badge}}</span>
+          </sc-if>
+        </a>
+      </sc-for>
+    </div>
+    <div style="margin-top: auto; border-top: 1px solid #E2E2DE; padding: 12px 18px 14px; display: flex; flex-direction: column; gap: 10px">
+      <sc-if value="{{expanded}}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-direction: column; gap: 5px">
+          <span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; color: #6B6E73">DATA FRESHNESS</span>
+          <div style="display: flex; justify-content: space-between; gap: 8px; font-size: 11.5px"><span style="color: #4A4D52">Sentinel-2 L2A</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px">17 Nov 06:42</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 8px; font-size: 11.5px"><span style="color: #4A4D52">MODI ESDM permits</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px">17 Nov 06:00</span></div>
+          <div style="display: flex; justify-content: space-between; gap: 8px; font-size: 11.5px"><span style="color: #4A4D52">Next S2 pass</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px">+2 d 04 h</span></div>
+        </div>
+      </sc-if>
+      <button type="button" onClick="{{toggleSide}}" aria-label="{{collapseLabel}}" aria-expanded="{{expanded}}" style="display: flex; align-items: center; justify-content: {{collapseJustify}}; gap: 8px; height: 30px; padding: 0 8px; border: 1px solid #DADAD5; border-radius: 4px; background: #FFFFFF; cursor: pointer; font-size: 12px; color: #3D4044">
+        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="transform: rotate({{chevRot}}deg)"><path d="M15 6 L9 12 L15 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <sc-if value="{{expanded}}" hint-placeholder-val="{{ true }}"><span>Collapse</span></sc-if>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN COLUMN -->
+  <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+
+    <!-- TOP BAR -->
+    <header style="min-height: 56px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 8px 20px; box-sizing: border-box; background: #FFFFFF; border-bottom: 1px solid #E2E2DE">
+      <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; min-width: 0">
+        <span style="color: #5F6368">Monitoring</span>
+        <span aria-hidden="true" style="color: #A3A6AA">/</span>
+        <span style="font-weight: 600">National overview</span>
+      </div>
+      <div style="flex: 1 1 320px; display: flex; justify-content: center; min-width: 0">
+        <label style="position: relative; display: flex; align-items: center; width: 100%; max-width: 540px">
+          <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search cases</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 10px; color: #6B6E73"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"></circle><path d="M16 16 L20 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+          <input type="search" value="{{query}}" onChange="{{onQuery}}" placeholder="Search location, company, permit no. or coordinates (-1.85, 110.01)" style="width: 100%; height: 34px; box-sizing: border-box; padding: 0 52px 0 32px; border: 1px solid #D8D8D3; border-radius: 4px; background: #F7F7F5; font-size: 12.5px">
+          <span aria-hidden="true" style="position: absolute; right: 8px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #5F6368; border: 1px solid #D8D8D3; border-radius: 3px; padding: 1px 5px; background: #FFFFFF">⌘K</span>
+        </label>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px">
+        <button type="button" aria-label="Date range: {{windowLabel}}" style="display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 10px; border: 1px solid #D8D8D3; border-radius: 4px; background: #FFFFFF; cursor: pointer; font-size: 12.5px">
+          <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"></rect><path d="M4 10 H20 M8.5 3.5 V7 M15.5 3.5 V7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>
+          <span style="font-variant-numeric: tabular-nums">{{windowLabel}}</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9 L12 15 L18 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>
+        </button>
+        <button type="button" aria-label="Notifications, 7 unread" style="position: relative; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border: 1px solid #D8D8D3; border-radius: 4px; background: #FFFFFF; cursor: pointer">
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16 V11 a6 6 0 0 1 12 0 V16 L19.5 18 H4.5 Z M10 20.5 a2 2 0 0 0 4 0" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg>
+          <span aria-hidden="true" style="position: absolute; top: -6px; right: -6px; min-width: 18px; height: 18px; padding: 0 4px; box-sizing: border-box; border-radius: 9px; background: #17181A; color: #FFFFFF; font-size: 10.5px; font-weight: 600; display: flex; align-items: center; justify-content: center; border: 2px solid #FFFFFF">7</span>
+        </button>
+        <div style="display: flex; align-items: center; gap: 9px; padding-left: 10px; border-left: 1px solid #E2E2DE">
+          <span aria-hidden="true" style="width: 30px; height: 30px; border-radius: 50%; background: #DCDCD6; display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 600; color: #2B2D31">RH</span>
+          <div style="display: flex; flex-direction: column; line-height: 1.15">
+            <span style="font-size: 12.5px; font-weight: 600">R. Hasibuan</span>
+            <span style="font-size: 10px; font-weight: 600; letter-spacing: 0.07em; color: #4A4D52">ANALYST · DLHK KALBAR</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main style="padding: 16px 20px 28px; display: flex; flex-direction: column; gap: 14px; max-width: 1720px; width: 100%; box-sizing: border-box">
+
+      <!-- PAGE HEADER -->
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 10px 16px">
+        <div style="display: flex; flex-direction: column; gap: 3px">
+          <h1 style="margin: 0; font-size: 20px; font-weight: 650; letter-spacing: -0.015em">National overview</h1>
+          <span style="font-size: 12px; color: #5F6368">Change detection on Sentinel-2 L2A (10 m) cross-checked against MODI ESDM permit polygons · window <span style="color: #17181A; font-weight: 500">{{windowLabel}}</span></span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: #5F6368">PROVINCE
+            <select value="{{prov}}" onChange="{{onProv}}" style="height: 32px; padding: 0 8px; border: 1px solid #D8D8D3; border-radius: 4px; background: #FFFFFF; font-size: 12.5px; font-weight: 500; letter-spacing: 0; color: #17181A">
+              <option value="ALL">All provinces (38)</option>
+              <option value="Bangka Belitung">Bangka Belitung</option>
+              <option value="Jambi">Jambi</option>
+              <option value="Kalimantan Barat">Kalimantan Barat</option>
+              <option value="Kalimantan Selatan">Kalimantan Selatan</option>
+              <option value="Kalimantan Timur">Kalimantan Timur</option>
+              <option value="Maluku Utara">Maluku Utara</option>
+              <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
+              <option value="Papua Tengah">Papua Tengah</option>
+              <option value="Riau">Riau</option>
+              <option value="Sulawesi Tengah">Sulawesi Tengah</option>
+              <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
+              <option value="Sumatera Utara">Sumatera Utara</option>
+            </select>
+          </label>
+          <button type="button" style="height: 32px; padding: 0 12px; display: flex; align-items: center; gap: 7px; border: 1px solid #D8D8D3; border-radius: 4px; background: #FFFFFF; cursor: pointer; font-size: 12.5px; font-weight: 500">
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 V15 M7.5 10.5 L12 15 L16.5 10.5 M5 19.5 H19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            Export GeoJSON
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI STRIP -->
+      <section aria-label="Key figures for the selected window" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1px; background: #E2E2DE; border: 1px solid #E2E2DE; border-radius: 6px; overflow: hidden">
+        <sc-for list="{{kpis}}" as="k" hint-placeholder-count="5">
+          <div style="background: #FFFFFF; padding: 11px 14px 12px; display: flex; flex-direction: column; gap: 4px">
+            <div style="display: flex; align-items: center; gap: 7px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #5F6368">
+              <sc-if value="{{k.hasMark}}" hint-placeholder-val="{{ false }}">
+                <span aria-hidden="true" style="width: 8px; height: 8px; background: {{k.mark}}; border-radius: {{k.markRad}}; transform: rotate({{k.markRot}}); flex: none"></span>
+              </sc-if>
+              <span>{{k.label}}</span>
+            </div>
+            <div style="display: flex; align-items: baseline; gap: 6px">
+              <span style="font-size: 23px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums">{{k.value}}</span>
+              <span style="font-size: 11.5px; color: #5F6368">{{k.unit}}</span>
+            </div>
+            <span style="font-size: 11.5px; color: #5F6368; font-variant-numeric: tabular-nums">{{k.sub}}</span>
+          </div>
+        </sc-for>
+      </section>
+
+      <!-- MAP + FEED -->
+      <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: stretch">
+
+        <!-- MAP PANEL -->
+        <section aria-label="Detections map" style="flex: 65 1 640px; min-width: 0; border: 1px solid #D6D6D1; border-radius: 6px; overflow: hidden; background: #FFFFFF; display: flex; flex-direction: column">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; min-height: 40px; padding: 6px 12px; box-sizing: border-box; background: #1D2023; color: #D9DAD7; border-bottom: 1px solid #2D3135">
+            <div style="display: flex; align-items: baseline; gap: 10px">
+              <span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; color: #C2C4C0">DETECTIONS MAP</span>
+              <span style="font-size: 11.5px; color: #A9ACA8; font-variant-numeric: tabular-nums">{{mapCount}} priority sites in view</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px">
+              <button type="button" onClick="{{togglePermits}}" aria-pressed="{{showPermits}}" style="height: 26px; padding: 0 9px; display: flex; align-items: center; gap: 6px; border: 1px solid #3A3F44; border-radius: 3px; background: {{permitBtnBg}}; color: #E2E3E0; cursor: pointer; font-size: 11.5px">
+                <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-dasharray="3 2.4"></rect></svg>
+                Permit concessions
+              </button>
+              <span style="height: 26px; padding: 0 9px; display: flex; align-items: center; border: 1px solid #3A3F44; border-radius: 3px; font-size: 11.5px; color: #B7BAB6">Terrain · muted</span>
+              <div style="display: flex; border: 1px solid #3A3F44; border-radius: 3px; overflow: hidden">
+                <button type="button" aria-label="Zoom in" style="width: 26px; height: 24px; border: 0; border-right: 1px solid #3A3F44; background: #262A2E; color: #E2E3E0; cursor: pointer; font-size: 14px; line-height: 1">+</button>
+                <button type="button" aria-label="Zoom out" style="width: 26px; height: 24px; border: 0; background: #262A2E; color: #E2E3E0; cursor: pointer; font-size: 14px; line-height: 1">−</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="position: relative; aspect-ratio: 2 / 1; background: #181B1E; overflow: hidden">
+            <svg viewBox="0 -30 460 230" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block">
+              <defs>
+                <pattern id="mw-relief" width="6" height="6" patternUnits="userSpaceOnUse">
+                  <path d="M0 4.5 Q1.5 3 3 4.5 T6 4.5" fill="none" stroke="#474D51" stroke-width="0.35"></path>
+                </pattern>
+                <g id="mw-land">
+                  <polygon points="3,4 25,8 37,22 54,38 65,43 80,51 85,55 93,70 99,83 109,90 109,118 96,119 85,109 73,100 60,86 53,70 42,57 36,43 26,32 14,17 2,8"></polygon>
+                  <polygon points="101,75 110,77 118,89 115,92 105,85"></polygon>
+                  <polygon points="126,86 133,86 134,93 126,93"></polygon>
+                  <polygon points="102,128 118,121 135,124 154,129 177,129 194,137 194,146 175,144 154,141 132,138 114,134"></polygon>
+                  <polygon points="179,126 190,125 192,128 180,129"></polygon>
+                  <polygon points="195,141 203,140 206,145 198,148"></polygon>
+                  <polygon points="211,143 217,142 218,149 211,149"></polygon>
+                  <polygon points="218,142 232,140 242,141 242,148 230,150 219,149"></polygon>
+                  <polygon points="248,143 270,142 280,143 280,147 260,149 248,148"></polygon>
+                  <polygon points="240,155 258,155 258,162 242,162"></polygon>
+                  <polygon points="285,163 300,155 318,148 321,151 305,160 288,166"></polygon>
+                  <polygon points="140,45 146,41 155,43 164,34 180,28 190,14 204,8 210,0 223,-6 236,10 242,10 230,17 228,30 232,45 240,50 230,55 225,65 219,73 214,85 210,98 196,100 180,93 167,90 153,90 150,78 143,69"></polygon>
+                  <polygon points="248,59 255,51 270,50 285,51 297,44 302,46 294,56 280,55 265,55 256,60 260,68 275,68 284,69 278,75 268,75 263,79 273,90 282,104 278,114 270,108 265,102 260,90 256,87 253,98 254,115 245,115 244,100 238,90 242,75"></polygon>
+                  <polygon points="328,38 331,46 338,45 333,52 339,58 333,60 329,55 327,64 323,62 325,48 324,40"></polygon>
+                  <polygon points="330,89 350,87 361,91 358,96 340,95 328,94"></polygon>
+                  <polygon points="311,92 322,91 322,98 312,98"></polygon>
+                  <polygon points="360,70 370,64 385,67 391,69 392,80 400,93 415,82 430,76 450,84 460,86 460,151 450,141 430,144 426,120 410,107 395,100 386,96 378,100 370,89 380,84 372,81 363,75"></polygon>
+                </g>
+              </defs>
+              <rect x="0" y="-30" width="460" height="230" fill="#181B1E"></rect>
+              <polygon points="55,-30 63,-20 70,-5 80,15 84,17 78,0 72,-25 68,-30" fill="#24282B"></polygon>
+              <polygon points="268,-30 300,-30 318,-20 316,5 300,0 285,-5 270,-12" fill="#24282B"></polygon>
+              <polygon points="335,200 352,180 372,186 392,173 414,181 432,200" fill="#24282B"></polygon>
+              <g stroke="#2A2F33" stroke-width="0.4">
+                <path d="M50 -30 V200 M150 -30 V200 M250 -30 V200 M350 -30 V200 M450 -30 V200 M0 10 H460 M0 60 H460 M0 110 H460 M0 160 H460"></path>
+              </g>
+              <use href="#mw-land" fill="#363B3F" stroke="#50575C" stroke-width="0.5"></use>
+              <use href="#mw-land" fill="url(#mw-relief)"></use>
+              <g font-family="JetBrains Mono, monospace" font-size="5.2" fill="#7A8287">
+                <text x="52" y="-24">100°E</text><text x="152" y="-24">110°E</text><text x="252" y="-24">120°E</text><text x="352" y="-24">130°E</text>
+                <text x="3" y="8.5">5°N</text><text x="3" y="58.5">0°</text><text x="3" y="108.5">5°S</text><text x="3" y="158.5">10°S</text>
+              </g>
+              <g font-family="Inter, sans-serif" font-size="5.6" fill="#8D9499" letter-spacing="0.6">
+                <text x="40" y="96">SUMATRA</text><text x="168" y="62">KALIMANTAN</text><text x="236" y="122">SULAWESI</text><text x="132" y="152">JAWA</text><text x="408" y="125">PAPUA</text>
+              </g>
+              <g opacity="{{permitOpacity}}" fill="#9AA3A8" fill-opacity="0.1" stroke="#AEB6BA" stroke-width="0.6" stroke-dasharray="2 1.4">
+                <rect x="214" y="58" width="14" height="11"></rect>
+                <polygon points="262,80 276,79 278,90 264,91"></polygon>
+                <rect x="325" y="45" width="10" height="9"></rect>
+                <polygon points="266,90 279,89 280,99 267,100"></polygon>
+                <rect x="107" y="79" width="9" height="8"></rect>
+                <rect x="199" y="89" width="7" height="7"></rect>
+                <rect x="263" y="102" width="10" height="9"></rect>
+                <rect x="126" y="85" width="8" height="7"></rect>
+                <rect x="214" y="143" width="9" height="7"></rect>
+                <rect x="153" y="71" width="8" height="6"></rect>
+              </g>
+            </svg>
+
+            <!-- markers -->
+            <div style="position: absolute; inset: 0">
+              <sc-for list="{{markers}}" as="c" hint-placeholder-count="10">
+                <button type="button" onClick="{{c.pick}}" aria-label="{{c.aria}}" style="position: absolute; left: {{c.x}}%; top: {{c.y}}%; width: 24px; height: 24px; margin: -12px 0 0 -12px; padding: 0; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center">
+                  <span aria-hidden="true" style="width: {{c.size}}px; height: {{c.size}}px; background: {{c.mColor}}; border-radius: {{c.mRad}}; transform: rotate({{c.mRot}}); border: 1.5px solid #FFFFFF; box-shadow: 0 0 0 {{c.ring}}px rgba(255,255,255,0.28), 0 1px 3px rgba(0,0,0,0.5); box-sizing: border-box"></span>
+                </button>
+              </sc-for>
+            </div>
+
+            <!-- callout -->
+            <sc-if value="{{hasCallout}}" hint-placeholder-val="{{ false }}">
+              <div style="position: absolute; left: {{callout.x}}%; top: {{callout.y}}%; transform: translate({{callout.tx}}, -50%); width: 236px; background: #FFFFFF; border-radius: 5px; box-shadow: 0 6px 24px rgba(0,0,0,0.45); padding: 10px 12px; display: flex; flex-direction: column; gap: 6px">
+                <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px">
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #5F6368">{{callout.id}}</span>
+                  <span style="display: inline-flex; align-items: center; gap: 5px; height: 18px; padding: 0 6px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; background: {{callout.pillBg}}; color: {{callout.pillFg}}"><span style="width: 6px; height: 6px; background: {{callout.dot}}; border-radius: {{callout.mRad}}; transform: rotate({{callout.mRot}})"></span>{{callout.status}}</span>
+                </div>
+                <div style="font-weight: 600; font-size: 13px; line-height: 1.25">{{callout.loc}}</div>
+                <div style="font-size: 11.5px; color: #5F6368">{{callout.kab}}, {{callout.prov}}</div>
+                <div style="display: flex; gap: 12px; font-size: 11.5px; font-variant-numeric: tabular-nums"><span><b style="font-weight: 600">{{callout.conf}}%</b> conf.</span><span><b style="font-weight: 600">{{callout.areaTxt}}</b> ha</span><span>{{callout.comName}}</span></div>
+                <div style="display: flex; gap: 6px; margin-top: 2px">
+                  <button type="button" onClick="{{callout.open}}" style="flex: 1; height: 28px; border: 0; border-radius: 4px; background: #17181A; color: #FFFFFF; font-size: 12px; font-weight: 600; cursor: pointer">Open case</button>
+                  <button type="button" onClick="{{clearCallout}}" aria-label="Dismiss" style="width: 28px; height: 28px; border: 1px solid #D8D8D3; border-radius: 4px; background: #FFFFFF; cursor: pointer; font-size: 14px; line-height: 1">×</button>
+                </div>
+              </div>
+            </sc-if>
+
+            <!-- legend (also a status filter) -->
+            <div role="group" aria-label="Legend and status filter" style="position: absolute; left: 12px; bottom: 12px; background: rgba(21,24,27,0.94); border: 1px solid #33383C; border-radius: 5px; padding: 8px 6px 6px; display: flex; flex-direction: column; gap: 1px; min-width: 214px">
+              <div style="display: flex; justify-content: space-between; padding: 0 6px 4px; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; color: #A9ACA8"><span>SITE STATUS</span><span style="font-weight: 500; letter-spacing: 0.02em">click to filter</span></div>
+              <sc-for list="{{legend}}" as="l" hint-placeholder-count="3">
+                <button type="button" onClick="{{l.toggle}}" aria-pressed="{{l.on}}" style="display: flex; align-items: center; gap: 9px; height: 26px; padding: 0 6px; border: 0; border-radius: 3px; background: transparent; cursor: pointer; text-align: left; color: #E4E5E2; opacity: {{l.op}}">
+                  <span aria-hidden="true" style="width: 14px; display: flex; justify-content: center"><span style="width: 10px; height: 10px; background: {{l.color}}; border-radius: {{l.rad}}; transform: rotate({{l.rot}}); border: 1.5px solid #FFFFFF; box-sizing: border-box"></span></span>
+                  <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.05em; width: 50px">{{l.key}}</span>
+                  <span style="font-size: 11.5px; color: #C7C9C5; flex: 1">{{l.desc}}</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #A9ACA8">{{l.count}}</span>
+                </button>
+              </sc-for>
+              <div style="display: flex; align-items: center; gap: 9px; height: 22px; padding: 0 6px; font-size: 11px; color: #A9ACA8; opacity: {{permitLegendOp}}"><span aria-hidden="true" style="width: 14px; height: 9px; border: 1px dashed #AEB6BA; box-sizing: border-box"></span>Permit concession (MODI)</div>
+            </div>
+
+            <div style="position: absolute; right: 12px; bottom: 12px; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #B4B7B3">
+              <div style="width: 78px; height: 5px; border: 1px solid #B4B7B3; border-top: 0; box-sizing: border-box"></div>
+              <span>500 km</span>
+            </div>
+            <div style="position: absolute; right: 12px; top: 10px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8D9499">EPSG:4326 · 1:18M</div>
+          </div>
+
+          <!-- TIMELINE -->
+          <div style="padding: 10px 14px 12px; display: flex; flex-direction: column; gap: 6px; border-top: 1px solid #E2E2DE">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px">
+              <div style="display: flex; align-items: baseline; gap: 10px">
+                <span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; color: #5F6368">DETECTION HISTORY</span>
+                <span style="font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums">{{windowLabel}}</span>
+                <span style="font-size: 11.5px; color: #5F6368; font-variant-numeric: tabular-nums">{{windowMonths}} mo · {{windowTotal}} detections</span>
+              </div>
+              <div role="group" aria-label="Window presets" style="display: flex; border: 1px solid #D8D8D3; border-radius: 4px; overflow: hidden">
+                <sc-for list="{{presets}}" as="p" hint-placeholder-count="3">
+                  <button type="button" onClick="{{p.pick}}" aria-pressed="{{p.active}}" style="height: 24px; padding: 0 10px; border: 0; border-right: 1px solid #E2E2DE; background: {{p.bg}}; color: {{p.fg}}; font-size: 11.5px; font-weight: 600; cursor: pointer">{{p.label}}</button>
+                </sc-for>
+              </div>
+            </div>
+            <div style="position: relative; height: 46px; padding: 0 6px; display: flex; align-items: flex-end; gap: 3px">
+              <div aria-hidden="true" style="position: absolute; top: 0; bottom: 0; left: {{winLeft}}; width: {{winWidth}}; background: #EEEEEA; border-left: 1px solid #A3A6AA; border-right: 1px solid #A3A6AA"></div>
+              <sc-for list="{{hist}}" as="b" hint-placeholder-count="12">
+                <div title="{{b.title}}" style="position: relative; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; height: 100%">
+                  <div style="height: {{b.hM}}px; background: {{b.cM}}"></div>
+                  <div style="height: {{b.hK}}px; background: {{b.cK}}"></div>
+                  <div style="height: {{b.hH}}px; background: {{b.cH}}"></div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="position: relative; height: 26px">
+              <div aria-hidden="true" style="position: absolute; left: 6px; right: 6px; top: 12px; height: 2px; background: #DADAD5"></div>
+              <div aria-hidden="true" style="position: absolute; top: 12px; height: 2px; left: {{winLeft}}; width: {{winWidth}}; background: #17181A"></div>
+              <input class="mw-range" type="range" min="0" max="12" step="1" value="{{lo}}" onChange="{{onLo}}" aria-label="Window start" aria-valuetext="{{loText}}">
+              <input class="mw-range" type="range" min="0" max="12" step="1" value="{{hi}}" onChange="{{onHi}}" aria-label="Window end" aria-valuetext="{{hiText}}">
+            </div>
+            <div style="display: flex; padding: 0 6px; gap: 3px">
+              <sc-for list="{{hist}}" as="b" hint-placeholder-count="12">
+                <span style="flex: 1; text-align: center; font-size: 10.5px; color: {{b.labelColor}}; font-variant-numeric: tabular-nums">{{b.label}}</span>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+
+        <!-- FEED -->
+        <section aria-label="Detection feed" style="flex: 35 1 340px; min-width: 0; min-height: 560px; position: relative">
+          <div style="position: absolute; inset: 0; display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #D6D6D1; border-radius: 6px; overflow: hidden">
+            <div style="padding: 10px 14px 0; display: flex; flex-direction: column; gap: 8px; border-bottom: 1px solid #E2E2DE">
+              <div style="display: flex; justify-content: space-between; align-items: baseline">
+                <h2 style="margin: 0; font-size: 13.5px; font-weight: 650">Detection feed</h2>
+                <span style="font-size: 11.5px; color: #5F6368">Newest first · {{feedCount}} cases</span>
+              </div>
+              <div role="tablist" aria-label="Filter feed by status" style="display: flex; gap: 2px">
+                <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+                  <button type="button" role="tab" aria-selected="{{t.active}}" onClick="{{t.pick}}" style="position: relative; height: 30px; padding: 0 10px; border: 0; background: transparent; cursor: pointer; font-size: 12px; font-weight: {{t.weight}}; color: {{t.fg}}; display: flex; align-items: center; gap: 6px">
+                    {{t.label}}<span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #5F6368">{{t.count}}</span>
+                    <span aria-hidden="true" style="position: absolute; left: 6px; right: 6px; bottom: -1px; height: 2px; background: #17181A; opacity: {{t.barOp}}"></span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+            <div class="mw-scroll" style="flex: 1 1 0; min-height: 0; overflow-y: auto">
+              <sc-for list="{{feed}}" as="c" hint-placeholder-count="6">
+                <button type="button" onClick="{{c.open}}" aria-label="Open case {{c.id}}, {{c.loc}}" style="position: relative; display: grid; grid-template-columns: 86px minmax(0, 1fr); gap: 11px; width: 100%; text-align: left; padding: 10px 14px; border: 0; border-bottom: 1px solid #ECECE8; background: {{c.rowBg}}; cursor: pointer">
+                  <span aria-hidden="true" style="position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: #17181A; opacity: {{c.selOp}}"></span>
+                  <span style="display: flex; flex-direction: column; gap: 3px">
+                    <span style="display: flex; gap: 2px">
+                      <svg width="42" height="42" viewBox="0 0 40 40" aria-hidden="true" style="display: block; border-radius: 2px 0 0 2px"><rect width="40" height="40" fill="#34502F"></rect><circle cx="8" cy="9" r="6" fill="#3E5F38"></circle><circle cx="27" cy="7" r="7" fill="#2D4729"></circle><circle cx="33" cy="31" r="6" fill="#3E5F38"></circle><circle cx="7" cy="33" r="5" fill="#2D4729"></circle><circle cx="20" cy="18" r="5" fill="#3A5A34"></circle><path d="M0 26 C10 22 18 30 26 25 S36 20 40 22" stroke="#4E6B67" stroke-width="3" fill="none"></path></svg>
+                      <svg width="42" height="42" viewBox="0 0 40 40" aria-hidden="true" style="display: block; border-radius: 0 2px 2px 0"><rect width="40" height="40" fill="#34502F"></rect><circle cx="8" cy="9" r="6" fill="#3E5F38"></circle><circle cx="27" cy="7" r="7" fill="#2D4729"></circle><circle cx="33" cy="31" r="6" fill="#3E5F38"></circle><circle cx="7" cy="33" r="5" fill="#2D4729"></circle><path d="M0 26 C10 22 18 30 26 25 S36 20 40 22" stroke="#7E7254" stroke-width="3" fill="none"></path><polygon points="{{c.scar}}" fill="#B59D70"></polygon><circle cx="{{c.pondX}}" cy="{{c.pondY}}" r="3.2" fill="#7F978A"></circle><polygon points="{{c.scar}}" fill="none" stroke="#FFFFFF" stroke-width="0.8" stroke-dasharray="1.6 1.2"></polygon></svg>
+                    </span>
+                    <span style="display: flex; justify-content: space-between; font-size: 9.5px; letter-spacing: 0.06em; color: #5F6368; padding: 0 2px"><span>T0</span><span>T1</span></span>
+                  </span>
+                  <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0">
+                    <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+                      <span style="font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.loc}}</span>
+                      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #5F6368; white-space: nowrap">{{c.when}}</span>
+                    </span>
+                    <span style="font-size: 11.5px; color: #5F6368; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.kab}} · {{c.prov}}</span>
+                    <span style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin-top: 2px; font-size: 11.5px; font-variant-numeric: tabular-nums">
+                      <span style="display: inline-flex; align-items: center; gap: 5px; height: 19px; padding: 0 6px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; background: {{c.pillBg}}; color: {{c.pillFg}}"><span style="width: 6px; height: 6px; background: {{c.dot}}; border-radius: {{c.mRad}}; transform: rotate({{c.mRot}})"></span>{{c.status}}</span>
+                      <span><b style="font-weight: 600">{{c.conf}}%</b> <span style="color: #5F6368">confidence</span></span>
+                      <span><b style="font-weight: 600">{{c.areaTxt}}</b> <span style="color: #5F6368">ha</span></span>
+                      <span style="display: inline-flex; align-items: center; height: 17px; padding: 0 4px; border: 1px solid #CFCFCA; border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: #3D4044" title="{{c.comName}}">{{c.com}}</span>
+                    </span>
+                  </span>
+                </button>
+              </sc-for>
+              <sc-if value="{{feedEmpty}}" hint-placeholder-val="{{ false }}">
+                <div style="padding: 28px 16px; text-align: center; color: #5F6368; font-size: 12.5px">No priority cases match the current window and filters.</div>
+              </sc-if>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ANALYTICS -->
+      <div id="analytics" style="display: flex; flex-wrap: wrap; gap: 14px">
+        <section aria-label="Detections per month" style="flex: 1 1 460px; min-width: 0; background: #FFFFFF; border: 1px solid #D6D6D1; border-radius: 6px; padding: 12px 14px 12px">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 10px">
+            <div style="display: flex; flex-direction: column; gap: 2px">
+              <h2 style="margin: 0; font-size: 13.5px; font-weight: 650">Detections per month</h2>
+              <span style="font-size: 11.5px; color: #5F6368">All change detections ≥ 0.5 ha, by permit cross-check result</span>
+            </div>
+            <div style="display: flex; gap: 12px; font-size: 11.5px; color: #3D4044">
+              <span style="display: flex; align-items: center; gap: 5px"><span style="width: 9px; height: 9px; background: #C8322A"></span>MERAH</span>
+              <span style="display: flex; align-items: center; gap: 5px"><span style="width: 9px; height: 9px; background: #D99A1E"></span>KUNING</span>
+              <span style="display: flex; align-items: center; gap: 5px"><span style="width: 9px; height: 9px; background: #7FB08F"></span>HIJAU</span>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 6px">
+            <div style="position: relative; height: 160px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #5F6368; text-align: right">
+              <span style="position: absolute; right: 0; top: -6px">100</span><span style="position: absolute; right: 0; top: 34px">75</span><span style="position: absolute; right: 0; top: 74px">50</span><span style="position: absolute; right: 0; top: 114px">25</span><span style="position: absolute; right: 0; top: 154px">0</span>
+            </div>
+            <div style="position: relative; height: 160px">
+              <div aria-hidden="true" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between">
+                <div style="border-top: 1px solid #ECECE8"></div><div style="border-top: 1px solid #ECECE8"></div><div style="border-top: 1px solid #ECECE8"></div><div style="border-top: 1px solid #ECECE8"></div><div style="border-top: 1px solid #A3A6AA"></div>
+              </div>
+              <div style="position: absolute; inset: 0; display: flex; align-items: flex-end; gap: 10px; padding: 0 6px">
+                <sc-for list="{{bars}}" as="b" hint-placeholder-count="12">
+                  <div title="{{b.title}}" style="flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; opacity: {{b.op}}">
+                    <span style="font-size: 9.5px; text-align: center; color: #3D4044; font-variant-numeric: tabular-nums; margin-bottom: 2px">{{b.total}}</span>
+                    <div style="height: {{b.hM}}px; background: #C8322A"></div>
+                    <div style="height: {{b.hK}}px; background: #D99A1E"></div>
+                    <div style="height: {{b.hH}}px; background: #7FB08F"></div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div></div>
+            <div style="display: flex; gap: 10px; padding: 0 6px">
+              <sc-for list="{{bars}}" as="b" hint-placeholder-count="12">
+                <span style="flex: 1; text-align: center; font-size: 10.5px; color: #5F6368">{{b.label}}</span>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+
+        <section aria-label="Accuracy backtest" style="flex: 1 1 460px; min-width: 0; background: #FFFFFF; border: 1px solid #D6D6D1; border-radius: 6px; padding: 12px 14px 12px">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 10px">
+            <div style="display: flex; flex-direction: column; gap: 2px">
+              <h2 style="margin: 0; font-size: 13.5px; font-weight: 650">Accuracy backtest</h2>
+              <span style="font-size: 11.5px; color: #5F6368">vs 312 field-verified sites (DLHK / Polda ground truth) · threshold 0.70</span>
+            </div>
+            <div style="display: flex; gap: 12px; font-size: 11.5px; color: #3D4044">
+              <span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 2px; background: #1F2328"></span>Precision <b style="font-variant-numeric: tabular-nums">0.92</b></span>
+              <span style="display: flex; align-items: center; gap: 6px"><span style="width: 14px; height: 0; border-top: 2px dashed #4F79A8"></span>Recall <b style="font-variant-numeric: tabular-nums">0.85</b></span>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 6px">
+            <div style="position: relative; height: 160px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #5F6368; text-align: right">
+              <span style="position: absolute; right: 0; top: -6px">1.0</span><span style="position: absolute; right: 0; top: 34px">0.9</span><span style="position: absolute; right: 0; top: 74px">0.8</span><span style="position: absolute; right: 0; top: 114px">0.7</span><span style="position: absolute; right: 0; top: 154px">0.6</span>
+            </div>
+            <div style="position: relative; height: 160px">
+              <div aria-hidden="true" style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between">
+                <div style="border-top: 1px solid #ECECE8"></div><div style="border-top: 1px solid #ECECE8"></div><div style="border-top: 1px solid #ECECE8"></div><div style="border-top: 1px dashed #B8BAB6"></div><div style="border-top: 1px solid #A3A6AA"></div>
+              </div>
+              <div style="position: absolute; top: 0; bottom: 0; left: 6px; right: 6px">
+                <svg viewBox="0 0 1100 160" preserveAspectRatio="none" role="img" aria-label="Precision rose from 0.81 to 0.92 and recall from 0.72 to 0.85 between December 2025 and November 2026" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible">
+                  <polyline points="{{precPts}}" fill="none" stroke="#1F2328" stroke-width="2" vector-effect="non-scaling-stroke" stroke-linejoin="round"></polyline>
+                  <polyline points="{{recPts}}" fill="none" stroke="#4F79A8" stroke-width="2" stroke-dasharray="5 4" vector-effect="non-scaling-stroke" stroke-linejoin="round"></polyline>
+                </svg>
+                <sc-for list="{{lineDots}}" as="d" hint-placeholder-count="24">
+                  <span title="{{d.title}}" style="position: absolute; left: {{d.x}}%; top: {{d.y}}%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: #FFFFFF; border: 1.5px solid {{d.c}}; box-sizing: border-box"></span>
+                </sc-for>
+                <span style="position: absolute; right: 0; top: 99px; font-size: 10px; color: #5F6368; background: #FFFFFF; padding: 0 3px">alert threshold</span>
+              </div>
+            </div>
+            <div></div>
+            <div style="display: flex; justify-content: space-between; padding: 0 0">
+              <sc-for list="{{bars}}" as="b" hint-placeholder-count="12">
+                <span style="width: 24px; text-align: center; font-size: 10.5px; color: #5F6368">{{b.label}}</span>
+              </sc-for>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- CASE REGISTER -->
+      <section id="register" aria-label="Case register" style="background: #FFFFFF; border: 1px solid #D6D6D1; border-radius: 6px; overflow: hidden">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid #E2E2DE">
+          <div style="display: flex; align-items: baseline; gap: 10px">
+            <h2 style="margin: 0; font-size: 13.5px; font-weight: 650">Case register</h2>
+            <span style="font-size: 11.5px; color: #5F6368">{{tableCount}} priority cases · ≥ 2 ha or confidence ≥ 70%</span>
+          </div>
+          <span style="font-size: 11.5px; color: #5F6368">Sort: click a numeric column header</span>
+        </div>
+        <div class="mw-scroll" style="overflow-x: auto">
+          <div role="table" aria-label="Priority cases" style="min-width: 1060px">
+            <div role="row" style="display: grid; grid-template-columns: 118px minmax(170px, 1.5fr) minmax(130px, 1fr) 92px 84px 94px 96px 140px 116px; background: #F7F7F5; border-bottom: 1px solid #E2E2DE; font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #5F6368">
+              <span role="columnheader" style="padding: 8px 14px">CASE ID</span>
+              <span role="columnheader" style="padding: 8px 10px">LOCATION</span>
+              <span role="columnheader" style="padding: 8px 10px">PROVINCE</span>
+              <span role="columnheader" style="padding: 8px 10px">COMMODITY</span>
+              <span role="columnheader" aria-sort="{{sortAriaArea}}" style="padding: 0 4px; text-align: right"><button type="button" onClick="{{sortArea}}" style="width: 100%; height: 32px; border: 0; background: transparent; cursor: pointer; text-align: right; font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #3D4044; padding: 0 6px">AREA (HA) {{arrowArea}}</button></span>
+              <span role="columnheader" style="padding: 8px 10px">STATUS</span>
+              <span role="columnheader" aria-sort="{{sortAriaConf}}" style="padding: 0 4px; text-align: right"><button type="button" onClick="{{sortConf}}" style="width: 100%; height: 32px; border: 0; background: transparent; cursor: pointer; text-align: right; font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #3D4044; padding: 0 6px">CONFIDENCE {{arrowConf}}</button></span>
+              <span role="columnheader" aria-sort="{{sortAriaDate}}" style="padding: 0 4px"><button type="button" onClick="{{sortDate}}" style="width: 100%; height: 32px; border: 0; background: transparent; cursor: pointer; text-align: left; font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #3D4044; padding: 0 6px">DATE DETECTED {{arrowDate}}</button></span>
+              <span role="columnheader" style="padding: 8px 10px">ASSIGNED</span>
+            </div>
+            <sc-for list="{{table}}" as="c" hint-placeholder-count="8">
+              <div role="row" style="display: grid; grid-template-columns: 118px minmax(170px, 1.5fr) minmax(130px, 1fr) 92px 84px 94px 96px 140px 116px; align-items: center; min-height: 36px; border-bottom: 1px solid #EFEFEB; background: {{c.rowBg}}; font-size: 12.5px">
+                <span role="cell" style="padding: 0 14px"><button type="button" onClick="{{c.open}}" style="border: 0; background: transparent; padding: 0; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 500; color: #17181A; text-decoration: underline; text-decoration-color: #B8BAB6; text-underline-offset: 3px">{{c.id}}</button></span>
+                <span role="cell" style="padding: 0 10px; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><span style="font-weight: 500">{{c.loc}}</span> <span style="color: #5F6368">· {{c.kab}}</span></span>
+                <span role="cell" style="padding: 0 10px; color: #3D4044; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.prov}}</span>
+                <span role="cell" style="padding: 0 10px; display: flex; align-items: center; gap: 6px"><span style="display: inline-flex; align-items: center; height: 17px; padding: 0 4px; border: 1px solid #CFCFCA; border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: #3D4044">{{c.com}}</span><span style="color: #3D4044">{{c.comName}}</span></span>
+                <span role="cell" style="padding: 0 10px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 12px">{{c.areaTxt}}</span>
+                <span role="cell" style="padding: 0 10px"><span style="display: inline-flex; align-items: center; gap: 5px; height: 19px; padding: 0 6px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; background: {{c.pillBg}}; color: {{c.pillFg}}"><span style="width: 6px; height: 6px; background: {{c.dot}}; border-radius: {{c.mRad}}; transform: rotate({{c.mRot}})"></span>{{c.status}}</span></span>
+                <span role="cell" style="padding: 0 10px; display: flex; align-items: center; justify-content: flex-end; gap: 7px"><span aria-hidden="true" style="width: 34px; height: 4px; background: #ECECE8; border-radius: 2px; overflow: hidden"><span style="display: block; height: 100%; width: {{c.confBar}}%; background: #4A4D52"></span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px">{{c.conf}}%</span></span>
+                <span role="cell" style="padding: 0 10px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #3D4044">{{c.dateTxt}}</span>
+                <span role="cell" style="padding: 0 10px; color: {{c.whoColor}}; white-space: nowrap">{{c.who}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <footer style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; font-size: 11px; color: #5F6368">
+        <span>Imagery: Copernicus Sentinel-2 L2A · Permits: MODI ESDM sync 17 Nov 2026 06:00 WIB · Detector mw-seg v3.2</span>
+        <span>Sample data for design review · All decisions require analyst sign-off</span>
+      </footer>
+    </main>
+  </div>
+
+  <!-- CASE SLIDE-OVER -->
+  <sc-if value="{{panelOpen}}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 50">
+      <button type="button" onClick="{{closeCase}}" aria-label="Close case panel" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; border: 0; padding: 0; background: rgba(23,24,26,0.42); cursor: default"></button>
+      <aside aria-label="Case detail" class="mw-scroll" style="position: absolute; top: 0; right: 0; bottom: 0; width: 760px; max-width: 100%; background: #FFFFFF; overflow-y: auto; box-shadow: -12px 0 40px rgba(0,0,0,0.22); border-left: 1px solid #D6D6D1">
+        <dc-import name="Case" item="{{selectedCase}}" on-close="{{closeCase}}" hint-size="100%,1640px"></dc-import>
+      </aside>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1780}}'>
+const MONTHS = [['Dec','2025'],['Jan','2026'],['Feb','2026'],['Mar','2026'],['Apr','2026'],['May','2026'],['Jun','2026'],['Jul','2026'],['Aug','2026'],['Sep','2026'],['Oct','2026'],['Nov','2026']];
+const SER = {
+  MERAH: [9,11,8,12,14,10,13,17,15,19,21,23],
+  KUNING: [4,5,3,6,5,7,6,8,7,9,10,11],
+  HIJAU: [41,44,39,47,50,48,52,55,58,60,61,64]
+};
+const PREC = [0.81,0.83,0.82,0.85,0.86,0.86,0.88,0.89,0.88,0.90,0.91,0.92];
+const REC = [0.72,0.74,0.75,0.74,0.77,0.79,0.80,0.80,0.82,0.83,0.83,0.85];
+const ST = {
+  MERAH: { fg:'#A3241C', bg:'#FBE8E5', dot:'#C8322A', map:'#E5483D', rad:'1px', rot:'45deg', desc:'No matching permit' },
+  KUNING: { fg:'#6E4A00', bg:'#FBF0D6', dot:'#C98A12', map:'#E8A92E', rad:'2px', rot:'0deg', desc:'Permit expired' },
+  HIJAU: { fg:'#1E6A3E', bg:'#E4F1E8', dot:'#2E8B57', map:'#45AE72', rad:'50%', rot:'0deg', desc:'Inside valid permit' }
+};
+const COM = { Au:'Gold', Ni:'Nickel', C:'Coal', Sn:'Tin' };
+const SCARS = [
+  { p:'8,22 16,15 26,17 32,25 23,32 12,30', x:19, y:24 },
+  { p:'12,8 22,10 25,19 31,27 21,33 14,24', x:20, y:22 },
+  { p:'6,20 14,13 21,19 28,14 34,22 25,29 12,29', x:22, y:23 },
+  { p:'5,10 20,5 35,11 34,29 19,34 6,27', x:22, y:20 }
+];
+const CASES = [
+  { id:'MW-2026-0418', loc:'Sungai Pawan, Sandai', kab:'Kab. Ketapang', prov:'Kalimantan Barat', com:'Au', status:'MERAH', conf:92, area:14.6, m:11, date:'2026-11-16', time:'21:40', lat:-1.852, lon:110.010, who:'R. Hasibuan' },
+  { id:'MW-2026-0417', loc:'Langgikima', kab:'Kab. Konawe Utara', prov:'Sulawesi Tenggara', com:'Ni', status:'KUNING', conf:88, area:41.2, m:11, date:'2026-11-15', time:'09:12', lat:-3.402, lon:122.214, who:'D. Prasetyo' },
+  { id:'MW-2026-0416', loc:'Namang', kab:'Kab. Bangka Tengah', prov:'Bangka Belitung', com:'Sn', status:'MERAH', conf:85, area:6.8, m:11, date:'2026-11-14', time:'16:05', lat:-2.398, lon:106.206, who:'Unassigned' },
+  { id:'MW-2026-0415', loc:'Loa Kulu', kab:'Kab. Kutai Kartanegara', prov:'Kalimantan Timur', com:'C', status:'HIJAU', conf:97, area:122.5, m:11, date:'2026-11-12', time:'08:30', lat:-0.412, lon:117.006, who:'Auto-cleared' },
+  { id:'MW-2026-0414', loc:'Batang Natal', kab:'Kab. Mandailing Natal', prov:'Sumatera Utara', com:'Au', status:'MERAH', conf:79, area:3.4, m:10, date:'2026-10-29', time:'13:18', lat:0.804, lon:99.412, who:'S. Nasution' },
+  { id:'MW-2026-0413', loc:'Maba Selatan', kab:'Kab. Halmahera Timur', prov:'Maluku Utara', com:'Ni', status:'HIJAU', conf:95, area:58.0, m:10, date:'2026-10-24', time:'07:51', lat:0.998, lon:128.002, who:'Auto-cleared' },
+  { id:'MW-2026-0412', loc:'Rarowatu Utara', kab:'Kab. Bombana', prov:'Sulawesi Tenggara', com:'Au', status:'KUNING', conf:81, area:9.1, m:10, date:'2026-10-19', time:'10:44', lat:-4.598, lon:121.903, who:'D. Prasetyo' },
+  { id:'MW-2026-0411', loc:'Tabir Ulu', kab:'Kab. Merangin', prov:'Jambi', com:'Au', status:'MERAH', conf:90, area:22.7, m:9, date:'2026-09-30', time:'15:27', lat:-2.104, lon:102.098, who:'A. Lubis' },
+  { id:'MW-2026-0410', loc:'Gantung', kab:'Kab. Belitung Timur', prov:'Bangka Belitung', com:'Sn', status:'KUNING', conf:74, area:4.2, m:9, date:'2026-09-17', time:'11:02', lat:-2.896, lon:108.104, who:'Unassigned' },
+  { id:'MW-2026-0409', loc:'Kusan Hulu', kab:'Kab. Tanah Bumbu', prov:'Kalimantan Selatan', com:'C', status:'MERAH', conf:86, area:31.5, m:8, date:'2026-08-26', time:'09:39', lat:-3.502, lon:115.795, who:'R. Hasibuan' },
+  { id:'MW-2026-0408', loc:'Bahodopi', kab:'Kab. Morowali', prov:'Sulawesi Tengah', com:'Ni', status:'HIJAU', conf:96, area:210.3, m:7, date:'2026-07-21', time:'06:58', lat:-2.497, lon:121.896, who:'Auto-cleared' },
+  { id:'MW-2026-0407', loc:'Hulu Kuantan', kab:'Kab. Kuantan Singingi', prov:'Riau', com:'Au', status:'MERAH', conf:83, area:11.9, m:6, date:'2026-06-28', time:'14:15', lat:-0.503, lon:101.497, who:'A. Lubis' },
+  { id:'MW-2026-0406', loc:'Sekongkang', kab:'Kab. Sumbawa Barat', prov:'Nusa Tenggara Barat', com:'Au', status:'KUNING', conf:77, area:2.6, m:4, date:'2026-04-15', time:'08:20', lat:-8.802, lon:116.903, who:'Unassigned' },
+  { id:'MW-2026-0405', loc:'Siriwo', kab:'Kab. Nabire', prov:'Papua Tengah', com:'Au', status:'MERAH', conf:71, area:18.4, m:2, date:'2026-02-09', time:'12:06', lat:-3.401, lon:135.498, who:'Unassigned' }
+];
+const NAV = [
+  { key:'dash', label:'Dashboard', href:'#top', icon:'M9 4 L3 6 V20 L9 18 L15 20 L21 18 V4 L15 6 Z M9 4 V18 M15 6 V20' },
+  { key:'cases', label:'Cases', href:'#register', badge:'37', icon:'M8 6 H20 M8 12 H20 M8 18 H20 M4 6 H4.01 M4 12 H4.01 M4 18 H4.01' },
+  { key:'permits', label:'Permits Database', href:'#top', icon:'M14 3 H6 V21 H18 V7 Z M14 3 V7 H18 M9 13 H15 M9 17 H13' },
+  { key:'reports', label:'Reports', href:'#analytics', icon:'M4 20 H20 M7 16 V11 M12 16 V7 M17 16 V9' },
+  { key:'settings', label:'Settings', href:'#top', icon:'M4 7 H13 M17 7 H20 M4 17 H7 M11 17 H20 M15 5 V9 M9 15 V19' }
+];
+function fmtDate(d) {
+  const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const p = d.split('-');
+  return p[2] + ' ' + mo[parseInt(p[1], 10) - 1] + ' ' + p[0];
+}
+function sum(a, lo, hi) { let s = 0; for (let i = lo; i < hi; i++) s += a[i]; return s; }
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { collapsed: false, lo: 6, hi: 12, on: { MERAH: true, KUNING: true, HIJAU: true }, tab: 'ALL', prov: 'ALL', query: '', sel: null, callout: null, panel: false, permits: true, sortKey: 'date', sortDir: -1 };
+  }
+  openCase(id) { this.setState({ sel: id, callout: id, panel: true }); }
+  renderVals() {
+    const s = this.state;
+    const lo = s.lo, hi = s.hi, len = hi - lo;
+    const expanded = !s.collapsed;
+    const q = s.query.trim().toLowerCase();
+
+    const decorate = (c, i) => {
+      const st = ST[c.status];
+      const sc = c.area > 40 ? SCARS[3] : SCARS[i % 3];
+      return Object.assign({}, c, {
+        comName: COM[c.com], pillBg: st.bg, pillFg: st.fg, dot: st.dot, mColor: st.map, mRad: st.rad, mRot: st.rot,
+        areaTxt: c.area.toFixed(1), dateTxt: fmtDate(c.date) + ' ' + c.time, when: fmtDate(c.date).slice(0, 6) + ' ' + c.time,
+        scar: sc.p, pondX: sc.x, pondY: sc.y, confBar: c.conf,
+        x: ((c.lon - 95) / 46 * 100).toFixed(2), y: ((9 - c.lat) / 23 * 100).toFixed(2),
+        size: c.area > 40 ? 13 : 11,
+        ring: s.callout === c.id ? 4 : 0,
+        rowBg: s.sel === c.id ? '#F1F1EE' : '#FFFFFF', selOp: s.sel === c.id ? 1 : 0,
+        who: c.who, whoColor: c.who === 'Unassigned' ? '#8A5A00' : (c.who === 'Auto-cleared' ? '#5F6368' : '#17181A'),
+        aria: c.status + ' site, ' + c.loc + ', ' + c.prov + ', ' + c.conf + '% confidence',
+        open: () => this.openCase(c.id),
+        pick: () => this.setState({ callout: s.callout === c.id ? null : c.id, sel: c.id })
+      });
+    };
+    const all = CASES.map(decorate);
+    const base = all.filter(c => c.m >= lo && c.m < hi && (s.prov === 'ALL' || c.prov === s.prov) &&
+      (!q || (c.id + ' ' + c.loc + ' ' + c.kab + ' ' + c.prov + ' ' + c.comName + ' ' + c.lat + ', ' + c.lon).toLowerCase().indexOf(q) >= 0));
+    const visible = base.filter(c => s.on[c.status]);
+    const countBy = (arr, k) => arr.filter(c => c.status === k).length;
+
+    const feedList = (s.tab === 'ALL' ? visible : visible.filter(c => c.status === s.tab)).slice().sort((a, b) => (b.date + b.time).localeCompare(a.date + a.time));
+    const tabs = ['ALL', 'MERAH', 'KUNING', 'HIJAU'].map(k => ({
+      label: k === 'ALL' ? 'All' : k, count: k === 'ALL' ? visible.length : countBy(visible, k),
+      active: s.tab === k, weight: s.tab === k ? 600 : 500, fg: s.tab === k ? '#17181A' : '#4A4D52', barOp: s.tab === k ? 1 : 0,
+      pick: () => this.setState({ tab: k })
+    }));
+
+    const sk = s.sortKey, sd = s.sortDir;
+    const table = visible.slice().sort((a, b) => {
+      if (sk === 'area') return (a.area - b.area) * sd;
+      if (sk === 'conf') return (a.conf - b.conf) * sd;
+      return (a.date + a.time).localeCompare(b.date + b.time) * sd;
+    });
+    const sortBy = k => () => this.setState({ sortKey: k, sortDir: s.sortKey === k ? -s.sortDir : -1 });
+    const arrow = k => sk === k ? (sd < 0 ? '↓' : '↑') : '';
+    const ariaSort = k => sk === k ? (sd < 0 ? 'descending' : 'ascending') : 'none';
+
+    const legend = ['MERAH', 'KUNING', 'HIJAU'].map(k => ({
+      key: k, desc: ST[k].desc, color: ST[k].map, rad: ST[k].rad, rot: ST[k].rot, on: s.on[k], op: s.on[k] ? 1 : 0.45,
+      count: countBy(base, k),
+      toggle: () => { const on = Object.assign({}, s.on); on[k] = !on[k]; this.setState({ on }); }
+    }));
+
+    const c0 = s.callout ? visible.find(c => c.id === s.callout) : null;
+    let callout = null;
+    if (c0) callout = Object.assign({}, c0, { tx: parseFloat(c0.x) > 62 ? 'calc(-100% - 16px)' : '16px' });
+
+    const mLabel = i => MONTHS[i][0];
+    const windowLabel = MONTHS[lo][0] + ' ' + MONTHS[lo][1] + ' – ' + MONTHS[hi - 1][0] + ' ' + MONTHS[hi - 1][1];
+    const tot = i => SER.MERAH[i] + SER.KUNING[i] + SER.HIJAU[i];
+    const hist = MONTHS.map((mm, i) => {
+      const inW = i >= lo && i < hi;
+      const k = 44 / 100;
+      return {
+        label: mm[0], title: mm[0] + ' ' + mm[1] + ': ' + tot(i) + ' detections (' + SER.MERAH[i] + ' MERAH, ' + SER.KUNING[i] + ' KUNING, ' + SER.HIJAU[i] + ' HIJAU)',
+        hM: (SER.MERAH[i] * k).toFixed(1), hK: (SER.KUNING[i] * k).toFixed(1), hH: (SER.HIJAU[i] * k).toFixed(1),
+        cM: inW ? '#C8322A' : '#CFCFCA', cK: inW ? '#D99A1E' : '#DCDCD7', cH: inW ? '#7FB08F' : '#E6E6E2',
+        labelColor: inW ? '#17181A' : '#6B6E73'
+      };
+    });
+    const bars = MONTHS.map((mm, i) => {
+      const k = 160 / 100;
+      return {
+        label: mm[0], total: tot(i), op: i >= lo && i < hi ? 1 : 0.35,
+        title: mm[0] + ' ' + mm[1] + ': ' + tot(i) + ' detections',
+        hM: (SER.MERAH[i] * k).toFixed(1), hK: (SER.KUNING[i] * k).toFixed(1), hH: (SER.HIJAU[i] * k).toFixed(1)
+      };
+    });
+    const pts = arr => arr.map((v, i) => (i / 11 * 1100).toFixed(1) + ',' + ((1 - (v - 0.6) / 0.4) * 160).toFixed(1)).join(' ');
+    const lineDots = [];
+    PREC.forEach((v, i) => lineDots.push({ x: (i / 11 * 100).toFixed(2), y: ((1 - (v - 0.6) / 0.4) * 100).toFixed(2), c: '#1F2328', title: MONTHS[i][0] + ' precision ' + v.toFixed(2) }));
+    REC.forEach((v, i) => lineDots.push({ x: (i / 11 * 100).toFixed(2), y: ((1 - (v - 0.6) / 0.4) * 100).toFixed(2), c: '#4F79A8', title: MONTHS[i][0] + ' recall ' + v.toFixed(2) }));
+
+    const winSum = k => sum(SER[k], lo, hi);
+    const prevOk = lo - len >= 0;
+    const delta = k => {
+      if (!prevOk) return 'no prior window in range';
+      const cur = k === 'ALL' ? winSum('MERAH') + winSum('KUNING') + winSum('HIJAU') : winSum(k);
+      const prev = k === 'ALL' ? sum(SER.MERAH, lo - len, lo) + sum(SER.KUNING, lo - len, lo) + sum(SER.HIJAU, lo - len, lo) : sum(SER[k], lo - len, lo);
+      const p = Math.round((cur - prev) / prev * 100);
+      return (p >= 0 ? '+' : '') + p + '% vs prior ' + len + ' mo';
+    };
+    const total = winSum('MERAH') + winSum('KUNING') + winSum('HIJAU');
+    const flagged = visible.filter(c => c.status !== 'HIJAU');
+    const flaggedArea = flagged.reduce((a, c) => a + c.area, 0);
+    const kpis = [
+      { label: 'DETECTIONS', value: total.toLocaleString('en-US'), unit: 'sites', sub: delta('ALL'), hasMark: false },
+      { label: 'MERAH · NO PERMIT', value: winSum('MERAH'), unit: 'sites', sub: delta('MERAH'), hasMark: true, mark: ST.MERAH.dot, markRad: ST.MERAH.rad, markRot: ST.MERAH.rot },
+      { label: 'KUNING · EXPIRED', value: winSum('KUNING'), unit: 'sites', sub: delta('KUNING'), hasMark: true, mark: ST.KUNING.dot, markRad: ST.KUNING.rad, markRot: ST.KUNING.rot },
+      { label: 'FLAGGED AREA', value: flaggedArea.toFixed(1), unit: 'ha', sub: 'across ' + flagged.length + ' priority cases', hasMark: false },
+      { label: 'AWAITING REVIEW', value: flagged.length, unit: 'cases', sub: 'median time to decision 2.4 d', hasMark: false }
+    ];
+
+    const presets = [['3M', 9, 12], ['6M', 6, 12], ['12M', 0, 12]].map(p => {
+      const a = lo === p[1] && hi === p[2];
+      return { label: p[0], active: a, bg: a ? '#17181A' : '#FFFFFF', fg: a ? '#FFFFFF' : '#3D4044', pick: () => this.setState({ lo: p[1], hi: p[2] }) };
+    });
+
+    const sideW = expanded ? 232 : 60;
+    const navItems = NAV.map(n => {
+      const act = n.key === 'dash';
+      return {
+        label: n.label, href: n.href, icon: n.icon, current: act ? 'page' : undefined, badge: n.badge,
+        showLabel: expanded, showBadge: expanded && !!n.badge,
+        padL: expanded ? 18 : 0, padR: expanded ? 14 : 0, justify: expanded ? 'flex-start' : 'center',
+        color: act ? '#17181A' : '#3D4044', weight: act ? 600 : 500, bg: act ? '#EDEDE9' : 'transparent', barOp: act ? 1 : 0
+      };
+    });
+
+    const selectedCase = s.sel ? all.find(c => c.id === s.sel) : null;
+
+    return {
+      expanded, sideW, navItems, chevRot: expanded ? 0 : 180, collapseJustify: expanded ? 'flex-start' : 'center',
+      collapseLabel: expanded ? 'Collapse sidebar' : 'Expand sidebar',
+      toggleSide: () => this.setState({ collapsed: !s.collapsed }),
+      query: s.query, onQuery: e => this.setState({ query: e.target.value }),
+      prov: s.prov, onProv: e => this.setState({ prov: e.target.value }),
+      windowLabel, windowMonths: len, windowTotal: total.toLocaleString('en-US'),
+      kpis, legend, markers: visible, mapCount: visible.length,
+      hasCallout: !!callout, callout: callout || {}, clearCallout: () => this.setState({ callout: null }),
+      showPermits: s.permits, permitOpacity: s.permits ? 1 : 0, permitLegendOp: s.permits ? 1 : 0.45,
+      permitBtnBg: s.permits ? '#353A3F' : '#24282B', togglePermits: () => this.setState({ permits: !s.permits }),
+      hist, presets, lo, hi, loText: mLabel(Math.min(lo, 11)) + ' ' + MONTHS[Math.min(lo, 11)][1], hiText: 'end of ' + mLabel(hi - 1) + ' ' + MONTHS[hi - 1][1],
+      winLeft: 'calc(6px + ' + (lo / 12).toFixed(4) + ' * (100% - 12px))', winWidth: 'calc(' + (len / 12).toFixed(4) + ' * (100% - 12px))',
+      onLo: e => { const v = Math.min(parseInt(e.target.value, 10), s.hi - 1); this.setState({ lo: v }); },
+      onHi: e => { const v = Math.max(parseInt(e.target.value, 10), s.lo + 1); this.setState({ hi: v }); },
+      tabs, feed: feedList, feedCount: feedList.length, feedEmpty: feedList.length === 0,
+      bars, precPts: pts(PREC), recPts: pts(REC), lineDots,
+      table, tableCount: table.length,
+      sortArea: sortBy('area'), sortConf: sortBy('conf'), sortDate: sortBy('date'),
+      arrowArea: arrow('area'), arrowConf: arrow('conf'), arrowDate: arrow('date'),
+      sortAriaArea: ariaSort('area'), sortAriaConf: ariaSort('conf'), sortAriaDate: ariaSort('date'),
+      panelOpen: s.panel && !!selectedCase, selectedCase,
+      closeCase: () => this.setState({ panel: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

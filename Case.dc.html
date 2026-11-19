@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MineWatch — Case detail</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 100%; box-sizing: border-box; background: #FFFFFF; color: #17181A; font-family: Inter, system-ui, sans-serif; font-size: 13px; line-height: 1.35">
+
+  <!-- HEADER -->
+  <header style="position: sticky; top: 0; z-index: 5; background: #FFFFFF; border-bottom: 1px solid #E2E2DE; padding: 14px 24px 14px; display: flex; flex-direction: column; gap: 8px">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px">
+      <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5F6368">
+        <span>Cases</span><span aria-hidden="true" style="color: #A3A6AA">/</span>
+        <span style="font-family: 'JetBrains Mono', monospace; color: #17181A; font-weight: 500">{{c.id}}</span>
+        <span style="margin-left: 8px; padding-left: 8px; border-left: 1px solid #E2E2DE">Opened {{c.dateTxt}} WIB</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px">
+        <button type="button" aria-label="Previous case" style="width: 30px; height: 30px; border: 1px solid #D8D8D3; border-radius: 4px; background: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15 L12 9 L18 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button>
+        <button type="button" aria-label="Next case" style="width: 30px; height: 30px; border: 1px solid #D8D8D3; border-radius: 4px; background: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9 L12 15 L18 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button>
+        <button type="button" onClick="{{close}}" aria-label="Close case detail" style="width: 30px; height: 30px; border: 1px solid #D8D8D3; border-radius: 4px; background: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></button>
+      </div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 8px 16px">
+      <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+        <h1 style="margin: 0; font-size: 21px; font-weight: 650; letter-spacing: -0.02em">{{c.loc}}</h1>
+        <span style="font-size: 12.5px; color: #4A4D52">{{c.kab}}, {{c.prov}} · <span style="color: #5F6368">{{operator}}</span></span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+        <span style="display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 9px; border-radius: 3px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; background: {{st.bg}}; color: {{st.fg}}"><span style="width: 7px; height: 7px; background: {{st.dot}}; border-radius: {{st.rad}}; transform: rotate({{st.rot}})"></span>{{c.status}} · {{st.desc}}</span>
+        <span style="display: inline-flex; align-items: center; gap: 7px; height: 24px; padding: 0 8px 0 4px; border: 1px solid #D8D8D3; border-radius: 3px; font-size: 12px; font-weight: 500"><span style="display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 16px; padding: 0 3px; background: #17181A; color: #FFFFFF; border-radius: 2px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600">{{c.com}}</span>{{comName}}</span>
+        <span style="display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border: 1px solid #D8D8D3; border-radius: 3px; font-size: 12px; font-variant-numeric: tabular-nums"><b style="font-weight: 600; margin-right: 4px">{{c.conf}}%</b> confidence</span>
+      </div>
+    </div>
+  </header>
+
+  <div style="padding: 16px 24px 28px; display: flex; flex-direction: column; gap: 18px">
+
+    <!-- META GRID -->
+    <section aria-label="Detection metadata" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: #E2E2DE; border: 1px solid #E2E2DE; border-radius: 5px; overflow: hidden">
+      <div style="background: #FFFFFF; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #5F6368">COORDINATES</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500">{{latDms}}</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500">{{lonDms}}</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: #5F6368">{{decimal}}</span>
+      </div>
+      <div style="background: #FFFFFF; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #5F6368">DISTURBED AREA</span>
+        <span style="font-size: 20px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums">{{areaTxt}} <span style="font-size: 12px; font-weight: 500; color: #5F6368">ha</span></span>
+        <span style="font-size: 11px; color: #5F6368">+{{growthTxt}} ha since previous pass</span>
+      </div>
+      <div style="background: #FFFFFF; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #5F6368">FIRST FLAGGED</span>
+        <span style="font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums">{{firstFlagged}}</span>
+        <span style="font-size: 11px; color: #5F6368">4 consecutive positive passes</span>
+      </div>
+      <div style="background: #FFFFFF; padding: 10px 12px; display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #5F6368">SENSOR · MODEL</span>
+        <span style="font-size: 12.5px; font-weight: 500">Sentinel-2 L2A, 10 m</span>
+        <span style="font-size: 11px; color: #5F6368">mw-seg v3.2 · cloud 3%</span>
+      </div>
+    </section>
+
+    <!-- IMAGERY COMPARE -->
+    <section aria-label="Satellite imagery comparison" style="display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px">
+        <h2 style="margin: 0; font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; color: #5F6368">IMAGERY · BEFORE / AFTER</h2>
+        <div style="display: flex; gap: 6px">
+          <button type="button" onClick="{{toggleNdvi}}" aria-pressed="{{ndvi}}" style="display: flex; align-items: center; gap: 8px; height: 28px; padding: 0 10px 0 8px; border: 1px solid {{ndviBorder}}; border-radius: 4px; background: {{ndviBg}}; color: {{ndviFg}}; cursor: pointer; font-size: 12px; font-weight: 500">
+            <span aria-hidden="true" style="position: relative; width: 24px; height: 14px; border-radius: 7px; background: {{ndviTrack}}"><span style="position: absolute; top: 2px; left: {{ndviKnob}}px; width: 10px; height: 10px; border-radius: 50%; background: #FFFFFF"></span></span>
+            NDVI change overlay
+          </button>
+          <button type="button" onClick="{{toggleAoi}}" aria-pressed="{{aoi}}" style="display: flex; align-items: center; gap: 8px; height: 28px; padding: 0 10px 0 8px; border: 1px solid #D8D8D3; border-radius: 4px; background: #FFFFFF; cursor: pointer; font-size: 12px; font-weight: 500">
+            <span aria-hidden="true" style="position: relative; width: 24px; height: 14px; border-radius: 7px; background: {{aoiTrack}}"><span style="position: absolute; top: 2px; left: {{aoiKnob}}px; width: 10px; height: 10px; border-radius: 50%; background: #FFFFFF"></span></span>
+            Detection outline
+          </button>
+        </div>
+      </div>
+
+      <div style="position: relative; height: 340px; border-radius: 5px; overflow: hidden; background: #22301F; user-select: none">
+        <svg viewBox="0 0 720 340" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Before image, {{beforeDate}}: continuous forest canopy with river" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block">
+          <defs>
+            <pattern id="mwc-canopy" width="26" height="26" patternUnits="userSpaceOnUse">
+              <rect width="26" height="26" fill="#2E4A2B"></rect>
+              <circle cx="5" cy="6" r="5.5" fill="#3B5C36"></circle><circle cx="18" cy="4" r="4.5" fill="#34532F"></circle><circle cx="13" cy="16" r="6.5" fill="#406339"></circle><circle cx="3" cy="21" r="4" fill="#2A4427"></circle><circle cx="22" cy="19" r="5" fill="#3A5A34"></circle>
+            </pattern>
+            <pattern id="mwc-canopy2" width="41" height="37" patternUnits="userSpaceOnUse">
+              <circle cx="9" cy="11" r="7" fill="#25391F" opacity="0.55"></circle><circle cx="31" cy="27" r="8" fill="#4A6B40" opacity="0.4"></circle><circle cx="30" cy="6" r="4" fill="#22351E" opacity="0.5"></circle>
+            </pattern>
+          </defs>
+          <rect width="720" height="340" fill="url(#mwc-canopy)"></rect>
+          <rect width="720" height="340" fill="url(#mwc-canopy2)"></rect>
+          <path d="M-10 205 C 90 185 150 245 250 222 S 400 160 490 192 S 640 262 730 232" fill="none" stroke="#4C6A66" stroke-width="16"></path>
+          <path d="M600 -5 C 590 40 575 70 560 110" fill="none" stroke="#5D7A5A" stroke-width="3"></path>
+        </svg>
+
+        <div style="position: absolute; inset: 0; clip-path: inset(0 0 0 {{split}}%)">
+          <svg viewBox="0 0 720 340" preserveAspectRatio="xMidYMid slice" role="img" aria-label="After image, {{afterDate}}: cleared ground and excavation ponds inside the detection area" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block">
+            <rect width="720" height="340" fill="url(#mwc-canopy)"></rect>
+            <rect width="720" height="340" fill="url(#mwc-canopy2)"></rect>
+            <g opacity="{{auOp}}">
+              <path d="M-10 205 C 90 185 150 245 250 222 S 400 160 490 192 S 640 262 730 232" fill="none" stroke="#8C7B57" stroke-width="16"></path>
+              <path d="M600 -5 C 590 40 575 70 560 110 L 520 150" fill="none" stroke="#B9A57F" stroke-width="3.5"></path>
+              <path d="M120 340 L 210 250 L 250 228" fill="none" stroke="#B9A57F" stroke-width="3"></path>
+              <polygon points="232,176 300,158 372,170 430,150 512,168 540,214 498,252 420,262 356,246 290,262 236,240" fill="#A9916A"></polygon>
+              <polygon points="262,190 330,176 404,184 470,172 508,200 480,236 410,244 344,232 280,240" fill="#C4AE84"></polygon>
+              <ellipse cx="300" cy="212" rx="22" ry="12" fill="#7B968C"></ellipse>
+              <ellipse cx="362" cy="200" rx="18" ry="10" fill="#6E8A85"></ellipse>
+              <ellipse cx="422" cy="214" rx="24" ry="13" fill="#7B968C"></ellipse>
+              <ellipse cx="472" cy="198" rx="15" ry="9" fill="#87A096"></ellipse>
+              <ellipse cx="340" cy="234" rx="12" ry="7" fill="#6E8A85"></ellipse>
+              <g opacity="{{ndviOp}}">
+                <polygon points="222,168 300,148 374,160 432,140 520,158 552,214 504,262 420,274 354,258 290,272 226,248" fill="#F98E09" opacity="0.75"></polygon>
+                <polygon points="232,176 300,158 372,170 430,150 512,168 540,214 498,252 420,262 356,246 290,262 236,240" fill="#BC3754" opacity="0.85"></polygon>
+                <polygon points="262,190 330,176 404,184 470,172 508,200 480,236 410,244 344,232 280,240" fill="#57106E" opacity="0.85"></polygon>
+              </g>
+              <g opacity="{{aoiOp}}">
+                <polygon points="222,168 300,148 374,160 432,140 520,158 552,214 504,262 420,274 354,258 290,272 226,248" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-dasharray="6 4"></polygon>
+                <rect x="432" y="116" width="96" height="18" rx="2" fill="#17181A" opacity="0.85"></rect>
+                <text x="440" y="129" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFFFFF">AOI · {{areaTxt}} ha</text>
+              </g>
+            </g>
+            <g opacity="{{pitOp}}">
+              <path d="M-10 205 C 90 185 150 245 250 222 S 400 160 490 192 S 640 262 730 232" fill="none" stroke="#6F7A5E" stroke-width="16"></path>
+              <polygon points="180,90 420,70 560,120 570,250 430,300 220,290 150,200" fill="#A48B63"></polygon>
+              <polygon points="215,112 410,96 530,134 538,236 424,272 238,264 186,196" fill="none" stroke="#8C7552" stroke-width="3"></polygon>
+              <polygon points="250,134 400,122 498,150 504,222 418,246 262,240 222,190" fill="#B39A71" stroke="#8C7552" stroke-width="3"></polygon>
+              <ellipse cx="370" cy="190" rx="78" ry="36" fill="#4F6F78"></ellipse>
+              <path d="M560 160 L 640 120 L 730 110" fill="none" stroke="#C2AE88" stroke-width="5"></path>
+              <g opacity="{{ndviOp}}">
+                <polygon points="170,80 425,58 572,112 584,258 432,312 212,302 138,202" fill="#F98E09" opacity="0.75"></polygon>
+                <polygon points="180,90 420,70 560,120 570,250 430,300 220,290 150,200" fill="#BC3754" opacity="0.85"></polygon>
+                <polygon points="250,134 400,122 498,150 504,222 418,246 262,240 222,190" fill="#57106E" opacity="0.85"></polygon>
+              </g>
+              <g opacity="{{aoiOp}}">
+                <polygon points="170,80 425,58 572,112 584,258 432,312 212,302 138,202" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-dasharray="6 4"></polygon>
+                <rect x="430" y="36" width="104" height="18" rx="2" fill="#17181A" opacity="0.85"></rect>
+                <text x="438" y="49" font-family="JetBrains Mono, monospace" font-size="11" fill="#FFFFFF">AOI · {{areaTxt}} ha</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <span style="position: absolute; left: 10px; top: 10px; height: 22px; padding: 0 8px; display: flex; align-items: center; gap: 6px; background: rgba(23,24,26,0.82); color: #FFFFFF; border-radius: 3px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em">BEFORE <span style="font-family: 'JetBrains Mono', monospace; font-weight: 400; letter-spacing: 0">{{beforeDate}}</span></span>
+        <span style="position: absolute; right: 10px; top: 10px; height: 22px; padding: 0 8px; display: flex; align-items: center; gap: 6px; background: rgba(23,24,26,0.82); color: #FFFFFF; border-radius: 3px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em">AFTER <span style="font-family: 'JetBrains Mono', monospace; font-weight: 400; letter-spacing: 0">{{afterDate}}</span></span>
+
+        <div aria-hidden="true" style="position: absolute; top: 0; bottom: 0; left: {{split}}%; width: 2px; margin-left: -1px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(0,0,0,0.25); pointer-events: none"></div>
+        <div aria-hidden="true" style="position: absolute; top: 50%; left: {{split}}%; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 2px 8px rgba(0,0,0,0.35); display: flex; align-items: center; justify-content: center; pointer-events: none">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M9 7 L4 12 L9 17 M15 7 L20 12 L15 17" fill="none" stroke="#17181A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <input type="range" min="2" max="98" step="1" value="{{split}}" onChange="{{onSplit}}" aria-label="Before/after divider position" style="position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize">
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; font-size: 11px; color: #5F6368">
+        <span>True colour B4/B3/B2 · drag the divider to compare</span>
+        <sc-if value="{{ndvi}}" hint-placeholder-val="{{ false }}">
+          <span style="display: flex; align-items: center; gap: 8px">
+            <span style="font-weight: 600; letter-spacing: 0.06em">ΔNDVI</span>
+            <span style="font-family: 'JetBrains Mono', monospace">−0.6</span>
+            <span aria-hidden="true" style="display: flex; height: 8px; width: 140px; border-radius: 1px; overflow: hidden"><span style="flex: 1; background: #57106E"></span><span style="flex: 1; background: #BC3754"></span><span style="flex: 1; background: #F98E09"></span><span style="flex: 1; background: #FCFFA4"></span></span>
+            <span style="font-family: 'JetBrains Mono', monospace">0.0</span>
+          </span>
+        </sc-if>
+      </div>
+    </section>
+
+    <!-- AREA GROWTH -->
+    <section aria-label="Area growth by pass" style="display: flex; flex-direction: column; gap: 8px">
+      <h2 style="margin: 0; font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; color: #5F6368">DISTURBED AREA BY PASS</h2>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+        <sc-for list="{{growth}}" as="g" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: 5px">
+            <div style="height: 34px; display: flex; align-items: flex-end; background: #F5F5F2; border-radius: 2px"><div style="width: 100%; height: {{g.h}}%; background: #4A4D52; border-radius: 2px 2px 0 0"></div></div>
+            <div style="display: flex; justify-content: space-between; font-size: 11px"><span style="color: #5F6368">{{g.label}}</span><span style="font-family: 'JetBrains Mono', monospace; font-weight: 500">{{g.v}} ha</span></div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- PERMIT CROSS-CHECK -->
+    <section aria-label="Permit cross-check" style="display: flex; flex-direction: column; gap: 8px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+        <h2 style="margin: 0; font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; color: #5F6368">PERMIT CROSS-CHECK · MODI ESDM, 5 KM RADIUS</h2>
+        <span style="font-size: 11px; color: #5F6368">Synced 17 Nov 2026 06:00 WIB</span>
+      </div>
+      <div style="border: 1px solid #E2E2DE; border-radius: 5px; overflow: hidden">
+        <div role="table" aria-label="Nearby permits">
+          <div role="row" style="display: grid; grid-template-columns: minmax(0, 1.7fr) 86px 104px 82px 120px; background: #F7F7F5; border-bottom: 1px solid #E2E2DE; font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #5F6368">
+            <span role="columnheader" style="padding: 7px 12px">PERMIT</span>
+            <span role="columnheader" style="padding: 7px 8px">STATUS</span>
+            <span role="columnheader" style="padding: 7px 8px">VALID UNTIL</span>
+            <span role="columnheader" style="padding: 7px 8px; text-align: right">DISTANCE</span>
+            <span role="columnheader" style="padding: 7px 12px 7px 8px; text-align: right">OVERLAP W/ AOI</span>
+          </div>
+          <sc-for list="{{permits}}" as="p" hint-placeholder-count="3">
+            <div role="row" style="display: grid; grid-template-columns: minmax(0, 1.7fr) 86px 104px 82px 120px; align-items: center; min-height: 44px; border-bottom: 1px solid #EFEFEB; font-size: 12px">
+              <span role="cell" style="padding: 6px 12px; display: flex; flex-direction: column; gap: 1px; min-width: 0">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{p.no}}</span>
+                <span style="font-size: 11px; color: #5F6368">{{p.kind}}</span>
+              </span>
+              <span role="cell" style="padding: 0 8px"><span style="display: inline-flex; align-items: center; height: 18px; padding: 0 6px; border-radius: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; background: {{p.bg}}; color: {{p.fg}}">{{p.stLabel}}</span></span>
+              <span role="cell" style="padding: 0 8px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #3D4044">{{p.valid}}</span>
+              <span role="cell" style="padding: 0 8px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #3D4044">{{p.dist}}</span>
+              <span role="cell" style="padding: 0 12px 0 8px; display: flex; align-items: center; justify-content: flex-end; gap: 8px">
+                <span aria-hidden="true" style="width: 52px; height: 5px; background: #ECECE8; border-radius: 1px; overflow: hidden"><span style="display: block; height: 100%; width: {{p.ov}}%; background: #17181A"></span></span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; width: 36px; text-align: right">{{p.ov}}%</span>
+              </span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: #E2E2DE">
+          <div style="background: #FAFAF8; padding: 9px 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #5F6368">INSIDE ACTIVE PERMIT</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600">{{inActive}}</span></div>
+          <div style="background: #FAFAF8; padding: 9px 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #5F6368">INSIDE EXPIRED PERMIT</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600">{{inExpired}}</span></div>
+          <div style="background: #FAFAF8; padding: 9px 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #5F6368">NO PERMIT COVERAGE</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600">{{noCover}}</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISPATCH GATE -->
+    <section aria-label="Analyst review and dispatch" style="border: 1.5px solid #17181A; border-radius: 6px; overflow: hidden">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; padding: 9px 14px; background: #17181A; color: #FFFFFF">
+        <div style="display: flex; align-items: center; gap: 9px">
+          <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="1.5" fill="none" stroke="#FFFFFF" stroke-width="1.8"></rect><path d="M8 10.5 V7.5 a4 4 0 0 1 8 0 V10.5" fill="none" stroke="#FFFFFF" stroke-width="1.8"></path></svg>
+          <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.09em">ANALYST REVIEW · HUMAN DECISION REQUIRED</span>
+        </div>
+        <span style="font-size: 11px; color: #C9CBC7">No alert leaves MineWatch without a signed decision</span>
+      </div>
+
+      <sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
+        <div style="padding: 14px; display: flex; flex-direction: column; gap: 14px; background: #FFFFFF">
+          <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+            <sc-for list="{{steps}}" as="t" hint-placeholder-count="3">
+              <li style="display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 10px; border-radius: 4px; background: {{t.bg}}; font-size: 12px; font-weight: 500; color: {{t.fg}}">
+                <span aria-hidden="true" style="width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid {{t.ring}}; background: {{t.dotBg}}; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; box-sizing: border-box">{{t.mark}}</span>
+                {{t.label}}<span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">{{t.sr}}</span>
+              </li>
+            </sc-for>
+          </ol>
+
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); gap: 14px">
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <label style="display: flex; flex-direction: column; gap: 5px">
+                <span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #3D4044">1 · DECISION</span>
+                <select value="{{decision}}" onChange="{{onDecision}}" style="height: 36px; padding: 0 10px; border: 1px solid {{selBorder}}; border-radius: 4px; background: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 500; color: #17181A">
+                  <option value="">Select a decision…</option>
+                  <option value="confirmed">Confirmed illegal</option>
+                  <option value="verify">Needs field verification</option>
+                  <option value="fp">False positive</option>
+                  <option value="legal">Legal</option>
+                </select>
+              </label>
+              <div style="display: flex; flex-direction: column; gap: 5px">
+                <span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #3D4044">RECIPIENTS</span>
+                <sc-for list="{{recipients}}" as="r" hint-placeholder-count="3">
+                  <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: {{r.fg}}; text-decoration: {{r.strike}}">
+                    <svg width="13" height="13" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6 H20 V18 H4 Z M4 7 L12 13 L20 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path></svg>
+                    {{r.name}}
+                  </div>
+                </sc-for>
+                <span style="font-size: 11px; color: #5F6368">{{recipientNote}}</span>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <label style="display: flex; flex-direction: column; gap: 5px">
+                <span style="font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; color: #3D4044">ANALYST NOTES <span style="font-weight: 500; letter-spacing: 0; color: #5F6368">· included in alert and PDF</span></span>
+                <textarea value="{{notes}}" onChange="{{onNotes}}" rows="5" placeholder="Evidence summary, access route, nearest settlement, recommended action…" style="resize: vertical; min-height: 96px; padding: 8px 10px; border: 1px solid #D8D8D3; border-radius: 4px; font-family: inherit; font-size: 12.5px; line-height: 1.45; color: #17181A"></textarea>
+              </label>
+              <label style="display: flex; align-items: flex-start; gap: 9px; font-size: 12px; color: #17181A; cursor: pointer">
+                <input type="checkbox" checked="{{ack}}" onChange="{{onAck}}" style="width: 16px; height: 16px; margin: 1px 0 0; accent-color: #17181A">
+                <span><b style="font-weight: 600">2 · I have reviewed</b> the before/after imagery, NDVI change and permit overlap for {{c.id}}, and take responsibility for this decision.</span>
+              </label>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding-top: 12px; border-top: 1px solid #E2E2DE">
+            <span style="font-size: 11.5px; color: #5F6368; max-width: 300px">{{gateHint}}</span>
+            <button type="button" onClick="{{send}}" disabled="{{locked}}" aria-disabled="{{locked}}" style="height: 40px; padding: 0 18px; display: flex; align-items: center; gap: 9px; border: 1.5px solid {{btnBorder}}; border-radius: 4px; background: {{btnBg}}; color: {{btnFg}}; font-size: 13px; font-weight: 600; cursor: {{btnCursor}}">
+              <svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="{{btnIcon}}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              3 · {{btnLabel}}
+            </button>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 14px; display: flex; flex-direction: column; gap: 10px; background: #FAFAF8">
+          <div style="display: flex; align-items: center; gap: 10px">
+            <span aria-hidden="true" style="width: 22px; height: 22px; border-radius: 50%; background: #17181A; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+            <span style="font-size: 14px; font-weight: 600">{{sentTitle}}</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 4px 12px; font-size: 12px">
+            <span style="color: #5F6368">Reference</span><span style="font-family: 'JetBrains Mono', monospace">{{sentRef}}</span>
+            <span style="color: #5F6368">Decision</span><span>{{decisionLabel}}</span>
+            <span style="color: #5F6368">Signed by</span><span>R. Hasibuan · Analyst, DLHK Kalbar</span>
+            <span style="color: #5F6368">Timestamp</span><span style="font-family: 'JetBrains Mono', monospace">17 Nov 2026 20:24 WIB</span>
+          </div>
+          <div><button type="button" onClick="{{recall}}" style="height: 30px; padding: 0 12px; border: 1px solid #D8D8D3; border-radius: 4px; background: #FFFFFF; cursor: pointer; font-size: 12px; font-weight: 500">Recall within 10 min</button></div>
+        </div>
+      </sc-if>
+    </section>
+
+    <!-- FOOTER ACTIONS -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px">
+      <div style="display: flex; gap: 8px">
+        <button type="button" style="height: 34px; padding: 0 12px; display: flex; align-items: center; gap: 8px; border: 1px solid #C9C9C4; border-radius: 4px; background: #FFFFFF; cursor: pointer; font-size: 12.5px; font-weight: 500">
+          <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3 H6 V21 H18 V7 Z M14 3 V7 H18 M12 11 V17 M9 14 L12 17 L15 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          Generate PDF report
+        </button>
+        <button type="button" style="height: 34px; padding: 0 12px; border: 1px solid #C9C9C4; border-radius: 4px; background: #FFFFFF; cursor: pointer; font-size: 12.5px; font-weight: 500">Reassign…</button>
+      </div>
+      <span style="font-size: 11px; color: #5F6368; font-family: 'JetBrains Mono', monospace">audit: created 16 Nov 21:40 · viewed by 2 analysts</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"item":{"editor":null},"onClose":{"editor":null},"$preview":{"width":760,"height":1640}}'>
+const DEFAULT = { id:'MW-2026-0418', loc:'Sungai Pawan, Sandai', kab:'Kab. Ketapang', prov:'Kalimantan Barat', com:'Au', status:'MERAH', conf:92, area:14.6, m:11, date:'2026-11-16', time:'21:40', lat:-1.852, lon:110.010 };
+const ST = {
+  MERAH: { fg:'#A3241C', bg:'#FBE8E5', dot:'#C8322A', rad:'1px', rot:'45deg', desc:'No matching permit' },
+  KUNING: { fg:'#6E4A00', bg:'#FBF0D6', dot:'#C98A12', rad:'2px', rot:'0deg', desc:'Permit expired' },
+  HIJAU: { fg:'#1E6A3E', bg:'#E4F1E8', dot:'#2E8B57', rad:'50%', rot:'0deg', desc:'Inside valid permit' }
+};
+const COM = { Au:'Gold (emas)', Ni:'Nickel (nikel)', C:'Coal (batubara)', Sn:'Tin (timah)' };
+const PST = {
+  active: { label:'ACTIVE', bg:'#E4F1E8', fg:'#1E6A3E' },
+  expired: { label:'EXPIRED', bg:'#FBF0D6', fg:'#6E4A00' },
+  none: { label:'NONE', bg:'#EDEDE9', fg:'#3D4044' }
+};
+const DECISIONS = { confirmed:'Confirmed illegal', verify:'Needs field verification', fp:'False positive', legal:'Legal' };
+const MO = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function fmt(d) { const p = d.split('-'); return p[2] + ' ' + MO[parseInt(p[1], 10) - 1] + ' ' + p[0]; }
+function dms(v, pos, neg) {
+  const a = Math.abs(v), d = Math.floor(a), mf = (a - d) * 60, m = Math.floor(mf), s = ((mf - m) * 60).toFixed(1);
+  return d + '°' + String(m).padStart(2, '0') + '′' + s.padStart(4, '0') + '″ ' + (v < 0 ? neg : pos);
+}
+function permitsFor(c) {
+  const n = c.id.slice(-4);
+  if (c.status === 'MERAH') return [
+    { no:'IPR 540/' + n + '/DPMPTSP/2021', kind:'Izin Pertambangan Rakyat', st:'expired', valid:'11 Feb 2024', dist:'2.1 km NE', ov:0 },
+    { no:'IUP-OP 503/0871/2019', kind:'IUP Operasi Produksi', st:'active', valid:'30 Jun 2029', dist:'4.8 km S', ov:0 },
+    { no:'WPR-' + n + '-07', kind:'Wilayah Pertambangan Rakyat · zone only', st:'none', valid:'—', dist:'0.6 km W', ov:0 }
+  ];
+  if (c.status === 'KUNING') return [
+    { no:'IUP-OP 188.45/' + n + '/2016', kind:'IUP Operasi Produksi', st:'expired', valid:'03 Aug 2025', dist:'in AOI', ov:86 },
+    { no:'IUP-OP 540/2207/2020', kind:'IUP Operasi Produksi', st:'active', valid:'14 Jan 2030', dist:'1.9 km E', ov:0 },
+    { no:'IUP-EKS 77/' + n + '/2014', kind:'IUP Eksplorasi', st:'expired', valid:'22 May 2019', dist:'3.6 km N', ov:0 }
+  ];
+  return [
+    { no:'IUP-OP 545/' + n + '/2018', kind:'IUP Operasi Produksi', st:'active', valid:'09 Oct 2031', dist:'in AOI', ov:100 },
+    { no:'IUP-EKS 61/0932/2015', kind:'IUP Eksplorasi', st:'expired', valid:'17 Mar 2020', dist:'2.4 km W', ov:0 }
+  ];
+}
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { split: 50, ndvi: false, aoi: true, decision: '', notes: '', ack: false, sent: false };
+  }
+  componentDidUpdate(prev) {
+    const a = prev.item && prev.item.id, b = this.props.item && this.props.item.id;
+    if (a !== b) this.setState({ split: 50, ndvi: false, aoi: true, decision: '', notes: '', ack: false, sent: false });
+  }
+  renderVals() {
+    const s = this.state;
+    const c0 = this.props.item || DEFAULT;
+    const c = Object.assign({}, c0, { dateTxt: fmt(c0.date) + ' ' + c0.time });
+    const st = ST[c.status];
+    const a = c.area;
+    const permits = permitsFor(c).map(p => Object.assign({}, p, { stLabel: PST[p.st].label, bg: PST[p.st].bg, fg: PST[p.st].fg }));
+    const ha = v => v.toFixed(1) + ' ha';
+    const pct = v => Math.round(v * 100) + '%';
+    let inActive = '0.0 ha (0%)', inExpired = '0.0 ha (0%)', noCover = ha(a) + ' (100%)';
+    if (c.status === 'KUNING') { inExpired = ha(a * 0.86) + ' (86%)'; noCover = ha(a * 0.14) + ' (14%)'; }
+    if (c.status === 'HIJAU') { inActive = ha(a) + ' (100%)'; noCover = '0.0 ha (0%)'; }
+
+    const growth = [['Aug', 0.14], ['Sep', 0.44], ['Oct', 0.75], ['Nov', 1]].map(g => ({ label: g[0] + ' pass', v: (a * g[1]).toFixed(1), h: Math.round(g[1] * 100) }));
+
+    const d = s.decision;
+    const alerting = d === 'confirmed' || d === 'verify';
+    const closing = d === 'fp' || d === 'legal';
+    const ready = !!d && s.ack;
+    const prov = c.prov;
+    const recipients = [
+      { name: 'DLHK Provinsi ' + prov },
+      { name: 'Polda ' + prov + ' · Ditreskrimsus' },
+      { name: 'Dinas ESDM Provinsi ' + prov + ' (cc)' }
+    ].map(r => Object.assign(r, { fg: closing ? '#8A8D91' : '#17181A', strike: closing ? 'line-through' : 'none' }));
+
+    const step = (label, done, active) => ({
+      label, mark: done ? '✓' : '', sr: done ? '(done)' : '(pending)',
+      bg: done ? '#F1F1EE' : '#FFFFFF', fg: done || active ? '#17181A' : '#5F6368',
+      ring: done ? '#17181A' : (active ? '#17181A' : '#B8BAB6'), dotBg: done ? '#17181A' : '#FFFFFF'
+    });
+    const steps = [
+      step('Decision selected', !!d, !d),
+      step('Evidence acknowledged', s.ack, !!d && !s.ack),
+      step(closing ? 'Close case' : 'Dispatch alert', false, ready)
+    ];
+
+    let gateHint = 'Select a decision and confirm you reviewed the evidence to unlock dispatch.';
+    if (d && !s.ack) gateHint = 'Confirm the evidence acknowledgement (step 2) to unlock.';
+    if (ready && alerting) gateHint = 'Sends signed alert with imagery, permit table and your notes to 3 recipients.';
+    if (ready && closing) gateHint = 'No alert will be sent. Case closes and feeds back into model retraining.';
+
+    const sendIcon = 'M4 12 L20 4 L14 20 L11 13 Z M11 13 L20 4';
+    const lockIcon = 'M6 11 H18 V20 H6 Z M8.5 11 V8 a3.5 3.5 0 0 1 7 0 V11';
+    const closeIcon = 'M5 12.5 L10 17 L19 7';
+    const lat = c.lat, lon = c.lon;
+
+    return {
+      c, st, comName: COM[c.com],
+      operator: c.status === 'HIJAU' ? 'Activity matches registered permit holder' : (c.status === 'KUNING' ? 'Last permit holder on file — permit lapsed' : 'No registered operator on file'),
+      latDms: dms(lat, 'N', 'S'), lonDms: dms(lon, 'E', 'W'), decimal: lat.toFixed(4) + ', ' + lon.toFixed(4),
+      areaTxt: a.toFixed(1), growthTxt: (a * 0.25).toFixed(1),
+      firstFlagged: '19 Aug 2026',
+      beforeDate: '14 Mar 2026', afterDate: fmt(c.date),
+      split: s.split, onSplit: e => this.setState({ split: parseInt(e.target.value, 10) }),
+      ndvi: s.ndvi, ndviOp: s.ndvi ? 1 : 0, toggleNdvi: () => this.setState({ ndvi: !s.ndvi }),
+      ndviBg: s.ndvi ? '#17181A' : '#FFFFFF', ndviFg: s.ndvi ? '#FFFFFF' : '#17181A', ndviBorder: s.ndvi ? '#17181A' : '#D8D8D3',
+      ndviTrack: s.ndvi ? '#6B6E73' : '#B8BAB6', ndviKnob: s.ndvi ? 12 : 2,
+      aoi: s.aoi, aoiOp: s.aoi ? 1 : 0, toggleAoi: () => this.setState({ aoi: !s.aoi }),
+      aoiTrack: s.aoi ? '#17181A' : '#B8BAB6', aoiKnob: s.aoi ? 12 : 2,
+      auOp: c.com === 'Au' || c.com === 'Sn' ? 1 : 0, pitOp: c.com === 'Au' || c.com === 'Sn' ? 0 : 1,
+      growth, permits, inActive, inExpired, noCover,
+      steps, recipients,
+      recipientNote: closing ? 'Not notified — closing decisions stay internal.' : 'Routed by province of detection.',
+      decision: d, onDecision: e => this.setState({ decision: e.target.value }),
+      selBorder: d ? '#17181A' : '#B8BAB6',
+      notes: s.notes, onNotes: e => this.setState({ notes: e.target.value }),
+      ack: s.ack, onAck: e => this.setState({ ack: e.target.checked }),
+      locked: !ready, gateHint,
+      btnLabel: closing ? 'Close case — no alert' : 'Send alert to DLHK / Polda',
+      btnIcon: !ready ? lockIcon : (closing ? closeIcon : sendIcon),
+      btnBg: !ready ? '#ECECE8' : (closing ? '#FFFFFF' : '#17181A'),
+      btnFg: !ready ? '#6B6E73' : (closing ? '#17181A' : '#FFFFFF'),
+      btnBorder: !ready ? '#D8D8D3' : '#17181A',
+      btnCursor: ready ? 'pointer' : 'not-allowed',
+      send: () => { if (ready) this.setState({ sent: true }); },
+      notSent: !s.sent, sent: s.sent,
+      sentTitle: closing ? 'Case closed — no alert sent' : 'Alert dispatched to 3 recipients',
+      sentRef: (closing ? 'CLS-' : 'ALR-') + c.id.slice(3),
+      decisionLabel: DECISIONS[d] || '',
+      recall: () => this.setState({ sent: false }),
+      close: () => { if (this.props.onClose) this.props.onClose(); }
+    };
+  }
+}
+</script>
+</body>
+</html>

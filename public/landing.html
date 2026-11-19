@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MineWatch — Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;overflow-anchor:none}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid #2F5BD3;outline-offset:2px}
+section[id],footer[id]{scroll-margin-top:56px}
+.mw-wrap{width:100%;max-width:1400px;margin:0 auto;padding-left:clamp(20px,4vw,64px);padding-right:clamp(20px,4vw,64px);box-sizing:border-box}
+.mw-nav a:hover{color:#F3F3F1}
+.mw-hov-light:hover{background:rgba(243,243,241,0.12)}
+.mw-hov-inv:hover{background:#FFFFFF}
+.mw-hov-dark:hover{background:#2B2D31}
+.mw-hov-ink:hover{background:rgba(23,24,26,0.07)}
+.mw-seg button{transition:color .2s ease}
+.mw-anim{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.mw-anim.on{opacity:1;transform:translateY(0)}
+@media (max-width:1100px){
+  .mw-steps{grid-template-columns:repeat(2,minmax(0,1fr)) !important}
+  .mw-limits{grid-template-columns:minmax(0,1fr) !important}
+}
+@media (max-width:860px){
+  .mw-plans{grid-template-columns:minmax(0,1fr) !important}
+  .mw-slot-note{display:none !important}
+}
+@media (max-width:640px){
+  .mw-steps{grid-template-columns:minmax(0,1fr) !important}
+  .mw-stats{grid-template-columns:minmax(0,1fr) !important}
+  .mw-stat{border-left:0 !important;border-top:1px solid #E2E2DE;padding-left:0 !important}
+  .mw-hero-card{position:static !important;padding:20px 16px !important;opacity:1 !important;transform:none !important;pointer-events:auto !important}
+  .mw-hero-card>div{width:100% !important;border-radius:0 !important;border:0 !important;box-shadow:none !important}
+  #mw-hero-scrolldown{display:none !important}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .mw-anim{transition:none !important}
+}
+</style>
+</head>
+<body>
+<div id="top" style="width: 100%; min-height: 100vh; overflow-x: clip; background: #F3F3F1; color: #17181A; font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.45; font-feature-settings: 'cv11', 'ss01'">
+
+  <!-- NAVBAR (full-bleed) -->
+  <header style="position: sticky; top: 0; z-index: 30; width: 100%; background: #17181A; border-bottom: 1px solid rgba(243,243,241,0.16)">
+    <div class="mw-wrap" style="min-height: 56px; padding-top: 8px; padding-bottom: 8px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px">
+      <a href="#top" aria-label="MineWatch — top of page" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #F3F3F1">
+        <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" style="flex: none"><rect x="1" y="1" width="20" height="20" rx="3" fill="#F3F3F1"></rect><path d="M5.5 15.5 L9.2 8.5 L11.8 12.8 L13.6 10 L16.5 15.5" fill="none" stroke="#17181A" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"></path><circle cx="15.4" cy="6.6" r="1.3" fill="#17181A"></circle></svg>
+        <span style="display: flex; flex-direction: column; line-height: 1.1">
+          <span style="font-size: 15px; font-weight: 700; letter-spacing: -0.015em">MineWatch</span>
+          <span style="font-size: 10.5px; color: rgba(243,243,241,0.68); letter-spacing: 0.02em">Illegal Mining Detection</span>
+        </span>
+      </a>
+      <nav aria-label="Primary" class="mw-nav" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px">
+        <a href="#how" style="color: rgba(243,243,241,0.78); text-decoration: none; font-size: 13px; font-weight: 500">How it works</a>
+        <a href="#pricing" style="color: rgba(243,243,241,0.78); text-decoration: none; font-size: 13px; font-weight: 500">Pricing</a>
+        <a href="#data" style="color: rgba(243,243,241,0.78); text-decoration: none; font-size: 13px; font-weight: 500">About the data</a>
+        <a href="/login" class="mw-hov-light" style="display: inline-flex; align-items: center; height: 32px; padding: 0 14px; box-sizing: border-box; border: 1px solid rgba(243,243,241,0.4); border-radius: 4px; color: #F3F3F1; text-decoration: none; font-size: 13px; font-weight: 500">Log in</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO (true full-bleed, full-viewport background video; caption card reveals on scroll, not statically blocking) -->
+    <section aria-label="Overview" style="width: 100%; background: #17181A; color: #F3F3F1">
+      <div id="hero_frame" style="position: relative; width: 100%; height: 100vh; height: 100dvh; min-height: 480px; overflow: hidden; background: #17181A">
+
+        <div id="hero_video_slot" style="position: absolute; inset: 0; overflow: hidden; background: #17181A">
+          <video autoplay muted loop playsinline preload="auto" poster="/media/hero-poster.jpg" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+            <source src="/media/hero.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(23,24,26,0.55) 0%, rgba(23,24,26,0) 18%, rgba(23,24,26,0) 55%, rgba(23,24,26,0.38) 100%); pointer-events: none"></div>
+
+        <div aria-hidden="true" id="mw-hero-scrolldown" style="position: absolute; left: 50%; bottom: clamp(18px,3vh,32px); transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; color: rgba(243,243,241,0.78); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; transition: opacity .4s ease">
+          <span>SCROLL</span>
+          <svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 5 V19 M6 13 L12 19 L18 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+
+        <div class="mw-hero-card" style="position: absolute; left: clamp(16px, 3vw, 56px); right: clamp(16px, 3vw, 56px); bottom: clamp(16px, 3vw, 56px); display: flex; justify-content: flex-start; opacity: 0; transform: translateY(18px); pointer-events: none; transition: opacity .5s ease, transform .5s ease">
+          <div style="width: min(560px, 100%); box-sizing: border-box; display: flex; flex-direction: column; gap: clamp(12px, 1.3vw, 18px); padding: clamp(20px, 2.2vw, 30px); background: rgba(23,24,26,0.74); backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%); border: 1px solid rgba(243,243,241,0.14); border-radius: 10px; box-shadow: 0 18px 48px rgba(0,0,0,0.35)">
+            <span style="display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: clamp(10px, 0.65vw, 11.5px); letter-spacing: 0.07em; color: rgba(243,243,241,0.78); text-transform: uppercase">
+              <span style="display: inline-flex; gap: 4px" aria-hidden="true"><span style="width: 7px; height: 7px; background: #C8322A; transform: rotate(45deg); border-radius: 1px"></span><span style="width: 7px; height: 7px; background: #D99A1E; border-radius: 2px"></span><span style="width: 7px; height: 7px; background: #45AE72; border-radius: 50%"></span></span>
+              SATELLITE-ASSISTED MINING DISTURBANCE MONITORING
+            </span>
+            <h1 style="margin: 0; font-size: clamp(1.6rem, 0.7rem + 2.2vw, 2.9rem); line-height: 1.08; font-weight: 600; letter-spacing: -0.03em; text-wrap: balance">Satellite eyes on every mining permit in Indonesia.</h1>
+            <p style="margin: 0; font-size: clamp(13px, 0.3vw + 12px, 15.5px); line-height: 1.5; color: rgba(243,243,241,0.88)">AI-powered change detection on Sentinel-2 imagery, cross-checked against BIG's national permit registry — flagged for human review, never an automatic verdict.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <a href="/login" class="mw-hov-inv" style="display: inline-flex; align-items: center; justify-content: center; height: 42px; padding: 0 18px; box-sizing: border-box; border-radius: 4px; background: #F3F3F1; color: #17181A; text-decoration: none; font-size: 13.5px; font-weight: 600">View live dashboard</a>
+              <a href="#how" class="mw-hov-light" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 42px; padding: 0 16px; box-sizing: border-box; border: 1px solid rgba(243,243,241,0.5); border-radius: 4px; color: #F3F3F1; text-decoration: none; font-size: 13.5px; font-weight: 500">How detection works <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5 V19 M6 13 L12 19 L18 13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF STRIP (light band) -->
+    <section id="mw-proof" aria-label="Pilot figures" style="width: 100%; background: #F3F3F1; padding: clamp(48px, 7vw, 120px) 0">
+      <div class="mw-wrap">
+        <div class="mw-stats" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); font-family: 'JetBrains Mono', monospace">
+          <div class="mw-stat" role="group" aria-label="13 ground-truth pilot sites" style="display: flex; flex-direction: column; gap: 10px; padding: 4px clamp(16px, 2.4vw, 40px) 4px 0">
+            <span id="mw-n1" aria-hidden="true" style="font-size: clamp(2.5rem, 1rem + 4.2vw, 5.5rem); line-height: 1; font-weight: 500; letter-spacing: -0.045em; font-variant-numeric: tabular-nums">0</span>
+            <span style="font-size: clamp(12px, 0.3vw + 10px, 14px); color: rgba(23,24,26,0.68)">ground-truth pilot sites</span>
+          </div>
+          <div class="mw-stat" role="group" aria-label="4,608 permit polygons cross-checked" style="display: flex; flex-direction: column; gap: 10px; padding: 4px clamp(16px, 2.4vw, 40px); border-left: 1px solid #E2E2DE">
+            <span id="mw-n2" aria-hidden="true" style="font-size: clamp(2.5rem, 1rem + 4.2vw, 5.5rem); line-height: 1; font-weight: 500; letter-spacing: -0.045em; font-variant-numeric: tabular-nums">0</span>
+            <span style="font-size: clamp(12px, 0.3vw + 10px, 14px); color: rgba(23,24,26,0.68)">permit polygons cross-checked</span>
+          </div>
+          <div class="mw-stat" role="group" aria-label="7 provinces monitored" style="display: flex; flex-direction: column; gap: 10px; padding: 4px 0 4px clamp(16px, 2.4vw, 40px); border-left: 1px solid #E2E2DE">
+            <span id="mw-n3" aria-hidden="true" style="font-size: clamp(2.5rem, 1rem + 4.2vw, 5.5rem); line-height: 1; font-weight: 500; letter-spacing: -0.045em; font-variant-numeric: tabular-nums">0</span>
+            <span style="font-size: clamp(12px, 0.3vw + 10px, 14px); color: rgba(23,24,26,0.68)">provinces monitored</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS (dark band) -->
+    <section id="how" aria-label="How detection works" style="width: 100%; background: #17181A; color: #F3F3F1; padding: clamp(64px, 9vw, 160px) 0">
+      <div class="mw-wrap" style="display: flex; flex-direction: column; gap: clamp(32px, 4vw, 64px)">
+        <div style="display: flex; flex-direction: column; gap: clamp(10px, 1.2vw, 18px); max-width: 920px">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: clamp(11px, 0.4vw + 8px, 13px); letter-spacing: 0.08em; color: rgba(243,243,241,0.68)">HOW DETECTION WORKS · 04 STAGES · AI MODEL + HUMAN REVIEW</span>
+          <h2 style="margin: 0; font-size: clamp(1.75rem, 0.9rem + 2.8vw, 3.75rem); line-height: 1.05; font-weight: 600; letter-spacing: -0.032em; text-wrap: balance">Four stages. The last one is always a person.</h2>
+        </div>
+
+        <div id="mw-steps" class="mw-steps" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.4vw, 24px)">
+
+          <div class="mw-anim" style="display: flex; flex-direction: column; gap: 12px; padding: clamp(16px, 1.6vw, 28px); border: 1px solid rgba(243,243,241,0.16); border-radius: 6px; background: rgba(243,243,241,0.04)">
+            <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px; border-radius: 3px; background: rgba(243,243,241,0.12); color: #F3F3F1; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em"><span style="width: 6px; height: 6px; border-radius: 50%; background: rgba(243,243,241,0.7)"></span>01 · SATELLITE PASS · 10 m</span>
+            <h3 style="margin: 0; font-size: clamp(16px, 0.5vw + 12px, 21px); font-weight: 600; line-height: 1.2; letter-spacing: -0.015em">Sentinel-2 imagery, every pass</h3>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: rgba(243,243,241,0.78)">Sentinel-2 L2A surface reflectance at 10 m, roughly a 5-day revisit. Cloud-masked scenes are paired per area of interest: before (T0) and after (T1).</p>
+            <span style="margin-top: auto; padding-top: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: rgba(243,243,241,0.68)">OUT → scene pair T0 / T1</span>
+          </div>
+
+          <div class="mw-anim" style="display: flex; flex-direction: column; gap: 12px; padding: clamp(16px, 1.6vw, 28px); border: 1px solid rgba(243,243,241,0.16); border-radius: 6px; background: rgba(243,243,241,0.04)">
+            <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px; border-radius: 3px; background: rgba(243,243,241,0.12); color: #F3F3F1; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em"><span style="width: 6px; height: 6px; border-radius: 50%; background: rgba(243,243,241,0.7)"></span>02 · AI CHANGE DETECTION</span>
+            <h3 style="margin: 0; font-size: clamp(16px, 0.5vw + 12px, 21px); font-weight: 600; line-height: 1.2; letter-spacing: -0.015em">FC-Siam-diff v4 flags what changed</h3>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: rgba(243,243,241,0.78)">A trained Siamese change-detection network (FC-Siam-diff v4) compares T0 and T1 and outputs disturbance polygons, each with a confidence score.</p>
+            <span style="margin-top: auto; padding-top: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: rgba(243,243,241,0.68)">OUT → polygon, area (ha), confidence</span>
+          </div>
+
+          <div class="mw-anim" style="display: flex; flex-direction: column; gap: 12px; padding: clamp(16px, 1.6vw, 28px); border: 1px solid rgba(243,243,241,0.16); border-radius: 6px; background: rgba(243,243,241,0.04)">
+            <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px; border-radius: 3px; background: rgba(243,243,241,0.12); color: #F3F3F1; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em"><span style="width: 6px; height: 6px; border-radius: 50%; background: rgba(243,243,241,0.7)"></span>03 · PERMIT CROSS-CHECK</span>
+            <h3 style="margin: 0; font-size: clamp(16px, 0.5vw + 12px, 21px); font-weight: 600; line-height: 1.2; letter-spacing: -0.015em">Each polygon meets the permit map</h3>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: rgba(243,243,241,0.78)">Polygons are intersected with BIG Kebijakan Satu Peta mining-permit polygons and given one of three statuses:</p>
+            <div style="display: flex; flex-direction: column; gap: 6px">
+              <div style="display: flex; align-items: center; gap: 8px"><span style="display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 7px; border-radius: 3px; background: #FBE8E5; color: #17181A; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; min-width: 64px; box-sizing: border-box"><span style="width: 6px; height: 6px; background: #C8322A; transform: rotate(45deg); border-radius: 1px"></span>RED</span><span style="font-size: 12.5px; color: rgba(243,243,241,0.86)">No matching permit</span></div>
+              <div style="display: flex; align-items: center; gap: 8px"><span style="display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 7px; border-radius: 3px; background: #FBF0D6; color: #17181A; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; min-width: 64px; box-sizing: border-box"><span style="width: 6px; height: 6px; background: #D99A1E; border-radius: 2px"></span>YELLOW</span><span style="font-size: 12.5px; color: rgba(243,243,241,0.86)">Permit exists, expired</span></div>
+              <div style="display: flex; align-items: center; gap: 8px"><span style="display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 7px; border-radius: 3px; background: #E4F1E8; color: #17181A; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; min-width: 64px; box-sizing: border-box"><span style="width: 6px; height: 6px; background: #45AE72; border-radius: 50%"></span>GREEN</span><span style="font-size: 12.5px; color: rgba(243,243,241,0.86)">Inside a valid permit</span></div>
+            </div>
+          </div>
+
+          <div class="mw-anim" style="display: flex; flex-direction: column; gap: 12px; padding: clamp(16px, 1.6vw, 28px); border: 1px solid rgba(243,243,241,0.16); border-radius: 6px; background: rgba(243,243,241,0.04)">
+            <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 9px; border-radius: 3px; background: #F3F3F1; color: #17181A; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em"><span style="width: 6px; height: 6px; border-radius: 50%; background: #17181A"></span>04 · ANALYST REVIEW &amp; SIGN-OFF</span>
+            <h3 style="margin: 0; font-size: clamp(16px, 0.5vw + 12px, 21px); font-weight: 600; line-height: 1.2; letter-spacing: -0.015em">A named analyst decides</h3>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: rgba(243,243,241,0.78)">The analyst reviews imagery, NDVI change and permit overlap, then records a signed decision. Nothing is sent to DLHK or Polda before that.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <span style="height: 22px; display: inline-flex; align-items: center; padding: 0 8px; border: 1px solid rgba(243,243,241,0.3); border-radius: 3px; font-size: 11.5px; color: rgba(243,243,241,0.88)">Confirmed illegal</span>
+              <span style="height: 22px; display: inline-flex; align-items: center; padding: 0 8px; border: 1px solid rgba(243,243,241,0.3); border-radius: 3px; font-size: 11.5px; color: rgba(243,243,241,0.88)">Needs field verification</span>
+              <span style="height: 22px; display: inline-flex; align-items: center; padding: 0 8px; border: 1px solid rgba(243,243,241,0.3); border-radius: 3px; font-size: 11.5px; color: rgba(243,243,241,0.88)">False positive</span>
+              <span style="height: 22px; display: inline-flex; align-items: center; padding: 0 8px; border: 1px solid rgba(243,243,241,0.3); border-radius: 3px; font-size: 11.5px; color: rgba(243,243,241,0.88)">Legal</span>
+            </div>
+            <span style="margin-top: auto; padding-top: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: rgba(243,243,241,0.68)">OUT → signed decision, then alert</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING (light band) -->
+    <section id="pricing" aria-label="Pricing" style="width: 100%; background: #F3F3F1; padding: clamp(64px, 9vw, 160px) 0">
+      <div class="mw-wrap" style="display: flex; flex-direction: column; gap: clamp(28px, 3.4vw, 56px)">
+        <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 40px">
+          <div style="display: flex; flex-direction: column; gap: clamp(10px, 1.2vw, 18px); flex: 1 1 520px; max-width: 920px">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: clamp(11px, 0.4vw + 8px, 13px); letter-spacing: 0.08em; color: rgba(23,24,26,0.68)">PLANS · IDR</span>
+            <h2 style="margin: 0; font-size: clamp(1.75rem, 0.9rem + 2.8vw, 3.75rem); line-height: 1.05; font-weight: 600; letter-spacing: -0.032em; text-wrap: balance">Plans built for how much ground you need to watch.</h2>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px">
+            <div class="mw-seg" role="group" aria-label="Billing period" style="position: relative; display: grid; grid-template-columns: 1fr 1fr; width: 224px; height: 44px; box-sizing: border-box; padding: 4px; border-radius: 999px; background: #17181A">
+              <span id="mw-seg-ind" aria-hidden="true" style="position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 999px; background: #F3F3F1; transform: translateX(0%); transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1)"></span>
+              <button id="mw-btn-monthly" type="button" aria-pressed="true" style="position: relative; z-index: 1; border: 0; border-radius: 999px; background: transparent; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; color: #17181A">Monthly</button>
+              <button id="mw-btn-yearly" type="button" aria-pressed="false" style="position: relative; z-index: 1; border: 0; border-radius: 999px; background: transparent; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; color: rgba(243,243,241,0.78)">Yearly</button>
+            </div>
+            <span id="mw-badge" style="display: inline-flex; align-items: center; height: 24px; padding: 0 9px; border-radius: 999px; border: 1px solid #17181A; background: transparent; color: #17181A; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.02em; transition: background 0.25s ease, color 0.25s ease">2 months free</span>
+          </div>
+        </div>
+
+        <div class="mw-plans" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 28px); align-items: stretch">
+
+          <article style="display: flex; flex-direction: column; gap: 18px; padding: clamp(20px, 2vw, 34px); background: #FFFFFF; border: 1px solid #E2E2DE; border-radius: 6px; box-shadow: 0 1px 2px rgba(23, 24, 26, 0.06), 0 12px 32px rgba(23, 24, 26, 0.05)">
+            <div style="display: flex; flex-direction: column; gap: 4px">
+              <h3 style="margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.015em">Starter</h3>
+              <span style="font-size: 13px; color: rgba(23,24,26,0.68)">For a single task-force unit or pilot area.</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px">
+              <div style="display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 8px"><span id="mw-p1-price" style="font-family: 'JetBrains Mono', monospace; font-size: clamp(1.5rem, 0.9rem + 1.5vw, 2.25rem); line-height: 1.1; font-weight: 500; letter-spacing: -0.035em">Rp 2.500.000</span><span id="mw-p1-unit" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: rgba(23,24,26,0.68)">/month</span></div>
+              <span id="mw-p1-alt" style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: rgba(23,24,26,0.68)">Rp 25.000.000/year on yearly billing</span>
+            </div>
+            <ul style="list-style: none; margin: 0; padding: 14px 0 0; border-top: 1px solid #E2E2DE; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px">
+              <li style="display: flex; gap: 10px"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Up to 10 monitored sites</li>
+              <li style="display: flex; gap: 10px"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>AI change detection (FC-Siam-diff v4) on Sentinel-2 imagery</li>
+              <li style="display: flex; gap: 10px"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>3 analyst seats</li>
+            </ul>
+            <a href="/login" class="mw-hov-ink" style="margin-top: auto; display: flex; align-items: center; justify-content: center; height: 44px; box-sizing: border-box; border: 1px solid #17181A; border-radius: 4px; color: #17181A; text-decoration: none; font-size: 14px; font-weight: 600">Get started</a>
+          </article>
+
+          <article style="position: relative; display: flex; flex-direction: column; gap: 18px; padding: clamp(20px, 2vw, 34px); background: #FFFFFF; border: 1.5px solid #17181A; border-radius: 6px; box-shadow: 0 1px 2px rgba(23, 24, 26, 0.08), 0 16px 40px rgba(23, 24, 26, 0.1)">
+            <span style="position: absolute; top: -12px; left: clamp(20px, 2vw, 34px); display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 3px; background: #17181A; color: #F3F3F1; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.02em">Most teams choose this</span>
+            <div style="display: flex; flex-direction: column; gap: 4px">
+              <h3 style="margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.015em">Growth</h3>
+              <span style="font-size: 13px; color: rgba(23,24,26,0.68)">For provincial teams covering several regions.</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px">
+              <div style="display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 8px"><span id="mw-p2-price" style="font-family: 'JetBrains Mono', monospace; font-size: clamp(1.5rem, 0.9rem + 1.5vw, 2.25rem); line-height: 1.1; font-weight: 500; letter-spacing: -0.035em">Rp 8.000.000</span><span id="mw-p2-unit" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: rgba(23,24,26,0.68)">/month</span></div>
+              <span id="mw-p2-alt" style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: rgba(23,24,26,0.68)">Rp 80.000.000/year on yearly billing</span>
+            </div>
+            <ul style="list-style: none; margin: 0; padding: 14px 0 0; border-top: 1px solid #E2E2DE; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px">
+              <li style="display: flex; gap: 10px"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Up to 50 sites</li>
+              <li style="display: flex; gap: 10px"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Full national permit cross-check (4,608 polygons)</li>
+              <li style="display: flex; gap: 10px"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>10 analyst seats</li>
+              <li style="display: flex; gap: 10px"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>API access</li>
+              <li style="display: flex; gap: 10px"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Priority support</li>
+            </ul>
+            <a href="/login" class="mw-hov-dark" style="margin-top: auto; display: flex; align-items: center; justify-content: center; height: 44px; box-sizing: border-box; border-radius: 4px; background: #17181A; color: #F3F3F1; text-decoration: none; font-size: 14px; font-weight: 600">Get started</a>
+          </article>
+
+          <article style="display: flex; flex-direction: column; gap: 18px; padding: clamp(20px, 2vw, 34px); background: #FFFFFF; border: 1px solid #E2E2DE; border-radius: 6px; box-shadow: 0 1px 2px rgba(23, 24, 26, 0.06), 0 12px 32px rgba(23, 24, 26, 0.05)">
+            <div style="display: flex; flex-direction: column; gap: 4px">
+              <h3 style="margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.015em">Enterprise</h3>
+              <span style="font-size: 13px; color: rgba(23,24,26,0.68)">For national or multi-agency deployments.</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px">
+              <div style="display: flex; align-items: baseline; flex-wrap: wrap; gap: 2px 8px"><span style="font-family: 'JetBrains Mono', monospace; font-size: clamp(1.5rem, 0.9rem + 1.5vw, 2.25rem); line-height: 1.1; font-weight: 500; letter-spacing: -0.035em">Custom pricing</span></div>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: rgba(23,24,26,0.68)">Quoted per deployment</span>
+            </div>
+            <ul style="list-style: none; margin: 0; padding: 14px 0 0; border-top: 1px solid #E2E2DE; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px">
+              <li style="display: flex; gap: 10px"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Unlimited sites</li>
+              <li style="display: flex; gap: 10px"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>SLA</li>
+              <li style="display: flex; gap: 10px"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>White-label integration</li>
+              <li style="display: flex; gap: 10px"><svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12.5 L10 17 L19 7" fill="none" stroke="#17181A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Dedicated onboarding</li>
+            </ul>
+            <a href="/login" class="mw-hov-ink" style="margin-top: auto; display: flex; align-items: center; justify-content: center; height: 44px; box-sizing: border-box; border: 1px solid #17181A; border-radius: 4px; color: #17181A; text-decoration: none; font-size: 14px; font-weight: 600">Talk to us</a>
+          </article>
+        </div>
+
+        <p style="margin: 0; font-size: 12.5px; line-height: 1.5; color: rgba(23,24,26,0.68)">Prices shown in IDR. Detection runs on publicly available Sentinel-2 imagery only.</p>
+      </div>
+    </section>
+
+    <!-- LIMITATIONS (dark band) -->
+    <section id="limits" aria-label="Limitations" style="width: 100%; background: #17181A; padding: clamp(56px, 8vw, 140px) 0">
+      <div class="mw-wrap">
+        <div style="border: 1.5px solid #F3F3F1; border-radius: 6px; overflow: hidden; background: #F3F3F1; color: #17181A">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 12px; padding: 12px clamp(16px, 1.8vw, 28px)">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 L21 19 H3 Z M12 10 V14 M12 16.5 V16.6" fill="none" stroke="#17181A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              <h2 style="margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.09em">LIMITATIONS · READ BEFORE RELYING ON ANY FLAG</h2>
+            </div>
+            <span style="font-size: 12px; color: rgba(23,24,26,0.68)">Current prototype status, stated plainly</span>
+          </div>
+          <div class="mw-limits" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #E2E2DE; border-top: 1px solid #E2E2DE">
+            <div style="background: #FFFFFF; padding: clamp(16px, 1.8vw, 28px); display: flex; flex-direction: column; gap: 8px">
+              <span style="align-self: flex-start; height: 20px; display: inline-flex; align-items: center; padding: 0 7px; border: 1px solid #17181A; border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em">DETECTION · AI MODEL</span>
+              <p style="margin: 0; font-size: clamp(14px, 0.3vw + 12px, 16px); line-height: 1.55">Detection uses a <b style="font-weight: 600">trained AI change-detection model (FC-Siam-diff v4)</b>, not a human visually comparing images — but it is still <b style="font-weight: 600">a flag, not a legal verdict</b>.</p>
+            </div>
+            <div style="background: #FFFFFF; padding: clamp(16px, 1.8vw, 28px); display: flex; flex-direction: column; gap: 8px">
+              <span style="align-self: flex-start; height: 20px; display: inline-flex; align-items: center; padding: 0 7px; border: 1px solid #17181A; border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em">PERMIT DATA</span>
+              <p style="margin: 0; font-size: clamp(14px, 0.3vw + 12px, 16px); line-height: 1.55">Permit polygons are a <b style="font-weight: 600">~2022 BIG snapshot, not real-time</b>. Permits issued, renewed or revoked since then are not reflected.</p>
+            </div>
+            <div style="background: #FFFFFF; padding: clamp(16px, 1.8vw, 28px); display: flex; flex-direction: column; gap: 8px">
+              <span style="align-self: flex-start; height: 20px; display: inline-flex; align-items: center; padding: 0 7px; border: 1px solid #17181A; border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em">REVIEW</span>
+              <p style="margin: 0; font-size: clamp(14px, 0.3vw + 12px, 16px); line-height: 1.55"><b style="font-weight: 600">Every flagged case requires analyst sign-off.</b> A flag is a lead to examine, never an automatic verdict.</p>
+            </div>
+            <div style="background: #FFFFFF; padding: clamp(16px, 1.8vw, 28px); display: flex; flex-direction: column; gap: 8px">
+              <span style="align-self: flex-start; height: 20px; display: inline-flex; align-items: center; padding: 0 7px; border: 1px solid #17181A; border-radius: 3px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em">ALERTS · MOCK</span>
+              <p style="margin: 0; font-size: clamp(14px, 0.3vw + 12px, 16px); line-height: 1.55">Alert dispatch to DLHK / Polda is <b style="font-weight: 600">currently a mock, not a live integration</b>. No message leaves the system.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER / DATA (light band) -->
+  <footer id="data" style="width: 100%; background: #F3F3F1; padding: clamp(48px, 6vw, 96px) 0 clamp(28px, 3vw, 48px)">
+    <div class="mw-wrap" style="display: flex; flex-direction: column; gap: clamp(24px, 3vw, 40px)">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: clamp(11px, 0.4vw + 8px, 13px); font-weight: 500; letter-spacing: 0.08em; color: rgba(23,24,26,0.68)">ABOUT THE DATA</h2>
+        <div style="overflow-x: auto">
+          <div role="table" aria-label="Data sources" style="min-width: 640px; border: 1px solid #E2E2DE; border-radius: 6px; background: #FFFFFF; overflow: hidden">
+            <div role="row" style="display: grid; grid-template-columns: 1.4fr 1.4fr 1fr 1fr; border-bottom: 1px solid #E2E2DE; font-size: 11px; font-weight: 600; letter-spacing: 0.07em; color: rgba(23,24,26,0.68)">
+              <span role="columnheader" style="padding: 9px 14px">SOURCE</span><span role="columnheader" style="padding: 9px 14px">USED FOR</span><span role="columnheader" style="padding: 9px 14px">RESOLUTION / VINTAGE</span><span role="columnheader" style="padding: 9px 14px">REFRESH</span>
+            </div>
+            <div role="row" style="display: grid; grid-template-columns: 1.4fr 1.4fr 1fr 1fr; border-bottom: 1px solid #E2E2DE; font-size: 13px">
+              <span role="cell" style="padding: 10px 14px; font-weight: 500">Copernicus Sentinel-2 L2A</span><span role="cell" style="padding: 10px 14px">Change detection (AI model)</span><span role="cell" style="padding: 10px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px">10 m</span><span role="cell" style="padding: 10px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px">≈5-day revisit</span>
+            </div>
+            <div role="row" style="display: grid; grid-template-columns: 1.4fr 1.4fr 1fr 1fr; font-size: 13px">
+              <span role="cell" style="padding: 10px 14px; font-weight: 500">BIG · Kebijakan Satu Peta</span><span role="cell" style="padding: 10px 14px">Mining-permit polygons</span><span role="cell" style="padding: 10px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px">~2022 snapshot</span><span role="cell" style="padding: 10px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px">not real-time</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px 24px; padding-top: 18px; border-top: 1px solid #E2E2DE; font-size: 12.5px; color: rgba(23,24,26,0.68)">
+        <span>Contains modified Copernicus Sentinel data · Permit layers: Badan Informasi Geospasial (BIG), Kebijakan Satu Peta</span>
+        <span style="display: flex; align-items: center; gap: 16px"><span>MineWatch · Illegal Mining Detection</span><a href="/login" class="mw-hov-ink" style="display: inline-flex; align-items: center; height: 32px; padding: 0 14px; box-sizing: border-box; border: 1px solid #17181A; border-radius: 4px; color: #17181A; text-decoration: none; font-weight: 500">Log in</a></span>
+      </div>
+    </div>
+  </footer>
+</div>
+<script>
+(function(){
+  var FINAL = { n1: 13, n2: 4608, n3: 7 };
+  var reduced = (function(){ try { return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches); } catch(e){ return true; } })();
+  var counted = false, stepped = false, raf = null;
+
+  function setNums(n1,n2,n3){
+    document.getElementById('mw-n1').textContent = String(n1);
+    document.getElementById('mw-n2').textContent = n2.toLocaleString('en-US');
+    document.getElementById('mw-n3').textContent = String(n3);
+  }
+  if (reduced) setNums(FINAL.n1, FINAL.n2, FINAL.n3); else setNums(0,0,0);
+
+  function inView(id){
+    var el = document.getElementById(id);
+    if (!el) return false;
+    var r = el.getBoundingClientRect();
+    var vh = window.innerHeight || 800;
+    return r.top < vh * 0.88 && r.bottom > 0;
+  }
+  function runCount(){
+    var t0 = performance.now(), dur = 1400;
+    function tick(now){
+      var p = Math.min(1, (now - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      setNums(Math.round(FINAL.n1*e), Math.round(FINAL.n2*e), Math.round(FINAL.n3*e));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    }
+    raf = requestAnimationFrame(tick);
+  }
+  function runSteps(){
+    var els = document.querySelectorAll('#mw-steps .mw-anim');
+    els.forEach(function(el, i){
+      setTimeout(function(){ el.classList.add('on'); }, i*220);
+    });
+  }
+  function check(){
+    if (!counted && inView('mw-proof')) { counted = true; runCount(); }
+    if (!stepped && inView('mw-steps')) { stepped = true; runSteps(); }
+  }
+  if (reduced){
+    counted = true; stepped = true;
+    document.querySelectorAll('#mw-steps .mw-anim').forEach(function(el){ el.classList.add('on'); });
+  } else {
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check);
+    setTimeout(check, 60);
+    setTimeout(check, 600);
+    setTimeout(function(){
+      if (!stepped) { stepped = true; document.querySelectorAll('#mw-steps .mw-anim').forEach(function(el){ el.classList.add('on'); }); }
+      if (!counted) { counted = true; setNums(FINAL.n1, FINAL.n2, FINAL.n3); }
+    }, 3000);
+    check();
+  }
+
+  // Hero: video is full/clean on entry; caption card reveals once the user
+  // starts scrolling away from the top, instead of blocking the video statically.
+  (function(){
+    var card = document.querySelector('.mw-hero-card');
+    var scrollHint = document.getElementById('mw-hero-scrolldown');
+    if (!card) return;
+    var revealAt = 48; // px scrolled before the caption fades in
+    var isDesktop = window.matchMedia('(min-width:641px)');
+    var visible = null;
+    function update(){
+      if (!isDesktop.matches) return; // mobile: CSS forces it always visible/static
+      var show = window.scrollY > revealAt || window.pageYOffset > revealAt;
+      if (show === visible) return;
+      visible = show;
+      card.style.opacity = show ? '1' : '0';
+      card.style.transform = show ? 'translateY(0)' : 'translateY(18px)';
+      card.style.pointerEvents = show ? 'auto' : 'none';
+      if (scrollHint) scrollHint.style.opacity = show ? '0' : '1';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  // Pricing monthly/yearly toggle
+  var yearly = false;
+  var btnM = document.getElementById('mw-btn-monthly'), btnY = document.getElementById('mw-btn-yearly');
+  var ind = document.getElementById('mw-seg-ind'), badge = document.getElementById('mw-badge');
+  var p1Price = document.getElementById('mw-p1-price'), p1Unit = document.getElementById('mw-p1-unit'), p1Alt = document.getElementById('mw-p1-alt');
+  var p2Price = document.getElementById('mw-p2-price'), p2Unit = document.getElementById('mw-p2-unit'), p2Alt = document.getElementById('mw-p2-alt');
+  function render(){
+    btnM.setAttribute('aria-pressed', String(!yearly));
+    btnY.setAttribute('aria-pressed', String(yearly));
+    btnM.style.color = yearly ? 'rgba(243,243,241,0.78)' : '#17181A';
+    btnY.style.color = yearly ? '#17181A' : 'rgba(243,243,241,0.78)';
+    ind.style.transform = 'translateX(' + (yearly ? '100%' : '0%') + ')';
+    badge.style.background = yearly ? '#17181A' : 'transparent';
+    badge.style.color = yearly ? '#F3F3F1' : '#17181A';
+    p1Price.textContent = yearly ? 'Rp 25.000.000' : 'Rp 2.500.000';
+    p1Unit.textContent = yearly ? '/year' : '/month';
+    p1Alt.textContent = yearly ? 'Rp 2.500.000/month on monthly billing' : 'Rp 25.000.000/year on yearly billing';
+    p2Price.textContent = yearly ? 'Rp 80.000.000' : 'Rp 8.000.000';
+    p2Unit.textContent = yearly ? '/year' : '/month';
+    p2Alt.textContent = yearly ? 'Rp 8.000.000/month on monthly billing' : 'Rp 80.000.000/year on yearly billing';
+  }
+  btnM.addEventListener('click', function(){ yearly = false; render(); });
+  btnY.addEventListener('click', function(){ yearly = true; render(); });
+  render();
+})();
+</script>
+</body>
+</html>
