@@ -1,0 +1,113 @@
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#e8f5e9','primaryBorderColor':'#2e7d32','primaryTextColor':'#1b1b1b','lineColor':'#555','fontSize':'15px'}, 'flowchart':{'curve':'basis','nodeSpacing':35,'rankSpacing':55}}}%%
+%% CATATAN STATUS (14 Nov 2026): diagram ini = VISI PRODUK JANGKA PANJANG (future/roadmap).
+%% Scope provisioning AKTUAL untuk prototipe 3 bulan HANYA 2 layanan: OBS, ECS (region AP-Jakarta). ModelArts di-drop total 17 Nov 2026.
+%% GaussDB, MRS, DataArts, API Gateway, Astro, SMN DI BAWAH ini TIDAK DIPAKAI/belum diajukan —
+%% cross-check izin saat ini jalan via geopandas lokal (scripts/permit_crosscheck.py), BUKAN GaussDB.
+flowchart TB
+
+    subgraph SRC["① SUMBER DATA (eksternal, bukan Huawei)"]
+        direction TB
+        S1["Sentinel-2 L2A\n(Copernicus Data Space)\nTrue color, B04, B08, B11\nrevisit 5 hari, 10m/px"]
+        S2["Data Izin Tambang\nBIG KSP SatuPeta\n4.608 polygon IUP/IUPK\n(snapshot ~2022, baseline)"]
+        S3["MOMI / MODI ESDM\n(down / gated - login only)\nFase 2 roadmap: akses resmi B2G"]
+        S4["Ground Truth 13 kasus\n(berita resmi terverifikasi)\n-> jadi TEST/VALIDATION set"]
+    end
+
+    subgraph ING["② INGESTION & PREPROCESSING  🔶 RENCANA: Huawei ECS (belum provisioned — approval akses pending, Syafa)"]
+        direction TB
+        I1["Download GeoTIFF\nbefore/after per lokasi\n(scripts: Copernicus Browser\nAnalytical export)\n🔶 RENCANA: jalan di ECS\n(SAAT INI: masih di mesin lokal/lab,\nECS belum di-provision)"]
+        I2["QC: cek metadata geotag\n+ cek awan manual/otomatis\n(reliable / caveat / unreliable)"]
+        I3["Hitung index spektral\nNDVI = (B08-B04)/(B08+B04)\nNDMI = (B08-B11)/(B08+B11)\ncompute_ndvi_ndmi.py\n🔶 RENCANA: jalan di ECS (SAAT INI: lokal)\n🔷 ROADMAP jangka panjang: batch via MRS"]
+        I4["Training corpus AKTUAL:\nMineNetCD256 (71.711 patch, semua versi)\n+ Jasansky ekspansi Indonesia (v4 saja)\n🔷 dieksplorasi tapi TIDAK dipakai training:\nTang&Werner, Maus v2, OSCD100,\nHansen GFC, ESA WorldCover, CloudSEN12+"]
+    end
+
+    subgraph AI["③ AI PROCESSING  🔶 GPU lab lokal RTX 3060 (BUKAN Huawei Cloud — ECS tidak punya GPU)"]
+        direction TB
+        A1["Model terlatih: FC-Siam-diff\n(siamese shared-encoder + absolute-diff\nskip connections + decoder U-Net-style)\nInput: stack before+after (RGB+NIR)\nTraining corpus: MineNetCD256 (71.711 patch)\n+ Jasansky ekspansi Indonesia (v4)\n🔶 training+inference: lab RTX 3060\n(TIDAK di ECS/ModelArts — ECS cuma 1vCPU/2GB)"]
+        A2["Output: binary change mask\n+ confidence score per piksel\n(bukan threshold manual)"]
+        A3["Polygonize mask\n(rasterio.features.shapes)\n-> vektor area terdeteksi"]
+    end
+
+    subgraph XCHK["④ GEOSPATIAL CROSS-CHECK  🔶 SAAT INI: geopandas lokal (bukan GaussDB) | 🔷 ROADMAP: GaussDB + MRS"]
+        direction TB
+        X1["ST_Contains / overlay\npolygon terdeteksi vs\npolygon izin resmi (BIG/MOMI)\n🔶 AKTUAL: geopandas (permit_crosscheck.py)\n🔷 roadmap: spatial query GaussDB"]
+        X2{"Status klasifikasi"}
+        X2L["HIJAU\nDi dalam IUP aktif = legal"]
+        X2Y["KUNING\nIUP ada tapi expired"]
+        X2R["MERAH\nTidak ada IUP terdaftar\n= flagged for review\n(BUKAN vonis otomatis)"]
+    end
+
+    subgraph STORE["⑤ DATA & STORAGE LAYER  🔶 SAAT INI: OBS satu-satunya storage live — GaussDB & DataArts TIDAK DIPAKAI"]
+        direction TB
+        D1[("🔶 RENCANA: OBS\nObject Storage\nraw GeoTIFF + archive\n(2015-sekarang) + model checkpoint + evidence\n(SAAT INI: file lokal, OBS belum di-provision)")]
+        D2X["❌ GaussDB — TIDAK DIPAKAI\n(cross-check pakai geopandas lokal,\npermit_crosscheck.py, bukan database managed)"]
+        D3X["❌ DataArts — TIDAK DIPAKAI\n(tidak ada kebutuhan ETL/governance\ndi skala prototipe 3 bulan ini)"]
+    end
+
+    subgraph API["⑥ API / BACKEND  🔷 ROADMAP (belum diajukan): API Gateway"]
+        B1["🔷 ROADMAP: API Gateway\nREST endpoints:\n/detections /permits /alerts\n/timeline /cases"]
+    end
+
+    subgraph DASH["⑦ DASHBOARD WEB  🔷 ROADMAP (belum diajukan): Astro (Low-Code Web Platform)"]
+        direction TB
+        W1["Peta interaktif\n(titik merah/kuning/hijau)"]
+        W2["Timeline slider\nbefore/after imagery"]
+        W3["Panel analyst review\n(human-in-the-loop\nsebelum alert final)"]
+        W4["Report generator\nPDF bukti + koordinat"]
+    end
+
+    subgraph ALERT["⑧ ALERT  🔷 ROADMAP (belum diajukan): SMN"]
+        N1["🔷 ROADMAP: SMN\n(Simple Message Notification)\nemail ke DLHK/Polda\n(setelah analyst approve)"]
+    end
+
+    S1 --> I1
+    I1 --> I2
+    I2 -->|reliable/caveat| I3
+    I2 -->|unreliable, awan tebal| I1
+    I3 --> A1
+    I4 --> A1
+    S4 -.validation set.-> A1
+
+    A1 --> A2 --> A3 --> X1
+    S2 --> X1
+    S3 -.roadmap Fase 2.-> X1
+    X1 --> X2
+    X2 --> X2L
+    X2 --> X2Y
+    X2 --> X2R
+
+    S1 --> D1
+    I3 --> D1
+    X2L --> D1
+    X2Y --> D1
+    X2R --> D1
+
+    D1 --> B1
+
+    B1 --> W1
+    B1 --> W2
+    B1 --> W3
+    W3 -->|approve| W4
+    W3 -->|approve, hanya MERAH/KUNING| N1
+
+    subgraph LEGEND["LEGENDA — visi lengkap 9 layanan (roadmap); FIX FINAL hanya 2 yang dipakai: OBS, ECS"]
+        direction TB
+        L1["🔶 RENCANA DIPAKAI (final, 2 layanan — BELUM provisioned, nunggu approval Syafa): ECS (compute ingestion/preprocessing) · OBS (object storage citra, model, evidence)\n❌ TIDAK DIPAKAI SAMA SEKALI: ModelArts (training AI di server lab lokal RTX 3060) · GaussDB (geospatial DB, diganti geopandas lokal) · DataArts (ETL/governance)\n🔷 ROADMAP (belum diajukan, visi jangka panjang): MRS (batch/MapReduce) · API Gateway (expose endpoint ke dashboard) · Astro (low-code dashboard builder) · SMN (notifikasi email)"]
+    end
+
+    classDef src fill:#e3f2fd,stroke:#1565c0
+    classDef proc fill:#fff3e0,stroke:#ef6c00
+    classDef ai fill:#f3e5f5,stroke:#6a1b9a
+    classDef store fill:#eceff1,stroke:#37474f
+    classDef notused fill:#eeeeee,stroke:#9e9e9e,stroke-dasharray: 4 4
+    classDef dash fill:#e8f5e9,stroke:#2e7d32
+    classDef alert fill:#ffebee,stroke:#c62828
+    classDef legend fill:#fffde7,stroke:#f9a825,stroke-width:2px
+    class S1,S2,S3,S4 src
+    class I1,I2,I3,I4 proc
+    class A1,A2,A3,X1,X2,X2L,X2Y,X2R ai
+    class D1,B1 store
+    class D2X,D3X notused
+    class W1,W2,W3,W4 dash
+    class N1 alert
+    class L1 legend

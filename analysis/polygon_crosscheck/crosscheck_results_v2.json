@@ -1,0 +1,136 @@
+[
+  {
+    "case": "das_kampak_bangkabarat",
+    "name": "DAS Kampak, Jebus, Bangka Barat",
+    "total_disturbed_area_ha": 1478.0,
+    "total_overlap_with_any_permit_ha": 238.5,
+    "outside_all_nearby_permits_ha": 1239.4,
+    "pct_outside_any_permit": 83.9,
+    "n_permits_found_nearby": 3,
+    "permit_overlap_detail": [
+      {
+        "permit_name": "PT NUSANTARA ARTA MINING",
+        "commodity": "BIJIH TIMAH",
+        "issuer": "GUBERNUR",
+        "status_code": "2",
+        "permit_area_ha": 1395.7,
+        "overlap_with_disturbance_ha": 200.04,
+        "pct_disturbance_inside_this_permit": 13.5,
+        "distance_km_from_disturbance_centroid": 2.617
+      },
+      {
+        "permit_name": "PT TIMAH TBK",
+        "commodity": "TIMAH",
+        "issuer": "BUPATI",
+        "status_code": "2",
+        "permit_area_ha": 2259.4,
+        "overlap_with_disturbance_ha": 32.33,
+        "pct_disturbance_inside_this_permit": 2.2,
+        "distance_km_from_disturbance_centroid": 9.814
+      },
+      {
+        "permit_name": "PT TIMAH TBK",
+        "commodity": "TIMAH",
+        "issuer": "GUBERNUR",
+        "status_code": "2",
+        "permit_area_ha": 6866.0,
+        "overlap_with_disturbance_ha": 6.17,
+        "pct_disturbance_inside_this_permit": 0.4,
+        "distance_km_from_disturbance_centroid": 10.744
+      }
+    ],
+    "note": "FLAGGED FOR REVIEW -- bukan vonis otomatis. Area di luar izin bisa jadi aktivitas tanpa izin, ATAU data izin yang belum lengkap/update. Butuh verifikasi analyst manusia."
+  },
+  {
+    "case": "laroenai_morowali",
+    "name": "Laroenai, Morowali",
+    "total_disturbed_area_ha": 1854.6,
+    "total_overlap_with_any_permit_ha": 756.6,
+    "outside_all_nearby_permits_ha": 1098.0,
+    "pct_outside_any_permit": 59.2,
+    "n_permits_found_nearby": 8,
+    "permit_overlap_detail": [
+      {
+        "permit_name": "PT TEKNIK ALUM SERVICE",
+        "commodity": "NIKEL DMP",
+        "issuer": "BUPATI",
+        "status_code": "2",
+        "permit_area_ha": 1289.1,
+        "overlap_with_disturbance_ha": 217.29,
+        "pct_disturbance_inside_this_permit": 11.7,
+        "distance_km_from_disturbance_centroid": 7.133
+      },
+      {
+        "permit_name": "PT BUMI MOROWALI UTAMA",
+        "commodity": "NIKEL DMP",
+        "issuer": "BUPATI",
+        "status_code": "2",
+        "permit_area_ha": 1952.0,
+        "overlap_with_disturbance_ha": 207.13,
+        "pct_disturbance_inside_this_permit": 11.2,
+        "distance_km_from_disturbance_centroid": 2.463
+      },
+      {
+        "permit_name": "PT JASATAMA MANDIRI SUKSES",
+        "commodity": "BATU GAMPING UNTUK INDUSTRI",
+        "issuer": "MENTERI",
+        "status_code": "1",
+        "permit_area_ha": 99.9,
+        "overlap_with_disturbance_ha": 89.28,
+        "pct_disturbance_inside_this_permit": 4.8,
+        "distance_km_from_disturbance_centroid": 4.09
+      },
+      {
+        "permit_name": "PT NATURAL PERSADA MOROWALI",
+        "commodity": "BATU GAMPING",
+        "issuer": "GUBERNUR",
+        "status_code": "1",
+        "permit_area_ha": 93.1,
+        "overlap_with_disturbance_ha": 76.34,
+        "pct_disturbance_inside_this_permit": 4.1,
+        "distance_km_from_disturbance_centroid": 3.046
+      },
+      {
+        "permit_name": "PT BIMA CAKRA PERKASA MINERALINDO",
+        "commodity": "NIKEL DMP",
+        "issuer": "BUPATI",
+        "status_code": "2",
+        "permit_area_ha": 197.7,
+        "overlap_with_disturbance_ha": 74.82,
+        "pct_disturbance_inside_this_permit": 4.0,
+        "distance_km_from_disturbance_centroid": 2.507
+      },
+      {
+        "permit_name": "PT MINERAL BUMI PULUTI",
+        "commodity": "BATU GAMPING",
+        "issuer": "MENTERI",
+        "status_code": "1",
+        "permit_area_ha": 84.1,
+        "overlap_with_disturbance_ha": 74.17,
+        "pct_disturbance_inside_this_permit": 4.0,
+        "distance_km_from_disturbance_centroid": 2.04
+      },
+      {
+        "permit_name": "PT PAM MINERAL",
+        "commodity": "NIKEL DMP",
+        "issuer": "BUPATI",
+        "status_code": "2",
+        "permit_area_ha": 198.0,
+        "overlap_with_disturbance_ha": 30.09,
+        "pct_disturbance_inside_this_permit": 1.6,
+        "distance_km_from_disturbance_centroid": 2.492
+      },
+      {
+        "permit_name": "PT LAROENAI BUNGSEL SORAJAI",
+        "commodity": "NIKEL",
+        "issuer": "GUBERNUR",
+        "status_code": "2",
+        "permit_area_ha": 255.7,
+        "overlap_with_disturbance_ha": 0.42,
+        "pct_disturbance_inside_this_permit": 0.0,
+        "distance_km_from_disturbance_centroid": 4.527
+      }
+    ],
+    "note": "FLAGGED FOR REVIEW -- bukan vonis otomatis. Area di luar izin bisa jadi aktivitas tanpa izin, ATAU data izin yang belum lengkap/update. Butuh verifikasi analyst manusia."
+  }
+]

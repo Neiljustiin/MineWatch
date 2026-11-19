@@ -1,0 +1,89 @@
+flowchart TB
+
+    subgraph SRC["SUMBER DATA (eksternal)"]
+        S1["Sentinel-2 Copernicus"]
+        S2["BIG KSP izin tambang"]
+        S3["MOMI/MODI (down)"]
+        S4["13 ground truth - test set"]
+    end
+
+    subgraph ING["INGESTION - Huawei ECS"]
+        I1["Download GeoTIFF"]
+        I2["QC awan"]
+        I3["NDVI / NDMI"]
+        I4["Dataset akademik"]
+    end
+
+    subgraph AI["AI TRAINING/INFERENCE - resource sendiri (bukan ModelArts)"]
+        A1["U-Net / DeepLabV3+"]
+        A2["Change mask + confidence"]
+        A3["Polygonize"]
+    end
+
+    subgraph XCHK["CROSS-CHECK - resource sendiri (geopandas, bukan GaussDB)"]
+        X1["Overlay vs izin resmi"]
+        X2{"Status"}
+        X2L["HIJAU - legal"]
+        X2Y["KUNING - expired"]
+        X2R["MERAH - flagged"]
+    end
+
+    subgraph STORE["STORAGE"]
+        D1["OBS - Huawei (raw imagery)"]
+        D2["Hasil deteksi - disimpan file/OBS, bukan GaussDB"]
+    end
+
+    subgraph API["BACKEND API - dibangun sendiri (bukan API Gateway Huawei)"]
+        B1["API custom"]
+    end
+
+    subgraph DASH["DASHBOARD WEB - dibangun sendiri (bukan Astro)"]
+        W1["Peta"]
+        W2["Timeline"]
+        W3["Analyst review"]
+        W4["Report PDF"]
+    end
+
+    subgraph ALERT["NOTIFIKASI - resource sendiri (bukan SMN)"]
+        N1["Email/webhook custom"]
+    end
+
+    S1 --> I1
+    I1 --> I2
+    I2 --> I3
+    I3 --> A1
+    I4 --> A1
+    S4 -.-> A1
+
+    A1 --> A2
+    A2 --> A3
+    A3 --> X1
+    S2 --> X1
+    S3 -.-> X1
+
+    X1 --> X2
+    X2 --> X2L
+    X2 --> X2Y
+    X2 --> X2R
+
+    I3 --> D1
+    X2L --> D2
+    X2Y --> D2
+    X2R --> D2
+
+    D1 --> B1
+    D2 --> B1
+
+    B1 --> W1
+    B1 --> W2
+    B1 --> W3
+    W3 --> W4
+    W3 --> N1
+
+    classDef huawei fill:#c8e6c9,stroke:#2e7d32
+    classDef own fill:#ffe0b2,stroke:#e65100
+    classDef ext fill:#e3f2fd,stroke:#1565c0
+
+    class S1,S2,S3,S4 ext
+    class I1,I2,I3,I4,D1 huawei
+    class A1,A2,A3,X1,X2,X2L,X2Y,X2R,D2,B1,W1,W2,W3,W4,N1 own

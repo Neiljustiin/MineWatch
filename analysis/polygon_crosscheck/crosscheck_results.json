@@ -1,0 +1,134 @@
+[
+  {
+    "case": "kembar_emas_sultra",
+    "name": "PT Kembar Emas Sultra (PT KES) - Konawe Utara",
+    "sharp_ndvi_loss_pixel_fraction": 0.22428944927047315,
+    "total_disturbed_area_ha": 2658.0,
+    "outside_all_nearby_permits_ha": 1833.5,
+    "permit_overlap_detail": [
+      {
+        "permit_name": "{'objectid': 813, 'issuer': 'GUBERNUR', 'prov': 'SULAWESI TENGGARA', 'idprov': '74', 'kab': 'KONAWE UTARA', 'idkab': '09",
+        "permit_area_ha": 1207.2,
+        "overlap_with_disturbance_ha": 101.51,
+        "pct_disturbance_inside_this_permit": 3.8,
+        "distance_deg_from_known_point": 0.0
+      },
+      {
+        "permit_name": "{'objectid': 1748, 'issuer': 'BUPATI', 'prov': 'SULAWESI TENGGARA', 'idprov': '74', 'kab': 'KONAWE UTARA', 'idkab': '09'",
+        "permit_area_ha": 103.1,
+        "overlap_with_disturbance_ha": 18.86,
+        "pct_disturbance_inside_this_permit": 0.7,
+        "distance_deg_from_known_point": 0.00102
+      },
+      {
+        "permit_name": "{'objectid': 330, 'issuer': 'GUBERNUR', 'prov': 'SULAWESI TENGGARA', 'idprov': '74', 'kab': 'KONAWE UTARA', 'idkab': '09",
+        "permit_area_ha": 457.4,
+        "overlap_with_disturbance_ha": 21.47,
+        "pct_disturbance_inside_this_permit": 0.8,
+        "distance_deg_from_known_point": 0.00458
+      },
+      {
+        "permit_name": "{'objectid': 1750, 'issuer': 'BUPATI', 'prov': 'SULAWESI TENGGARA', 'idprov': '74', 'kab': 'KONAWE UTARA', 'idkab': '09'",
+        "permit_area_ha": 408.2,
+        "overlap_with_disturbance_ha": 309.57,
+        "pct_disturbance_inside_this_permit": 11.6,
+        "distance_deg_from_known_point": 0.01033
+      },
+      {
+        "permit_name": "{'objectid': 1329, 'issuer': 'MENTERI', 'prov': 'SULAWESI TENGGARA', 'idprov': '74', 'kab': 'KONAWE UTARA', 'idkab': '09",
+        "permit_area_ha": 1680.6,
+        "overlap_with_disturbance_ha": 373.06,
+        "pct_disturbance_inside_this_permit": 14.0,
+        "distance_deg_from_known_point": 0.01376
+      }
+    ]
+  },
+  {
+    "case": "das_kampak_bangkabarat",
+    "name": "DAS Kampak, Jebus, Bangka Barat",
+    "sharp_ndvi_loss_pixel_fraction": 0.12773647875275607,
+    "total_disturbed_area_ha": 1476.9,
+    "outside_all_nearby_permits_ha": 1238.5,
+    "permit_overlap_detail": [
+      {
+        "permit_name": "{'objectid': 2064, 'issuer': 'GUBERNUR', 'prov': 'KEPULAUAN BANGKA BELITUNG', 'idprov': '19', 'kab': 'BANGKA BARAT', 'id",
+        "permit_area_ha": 1394.7,
+        "overlap_with_disturbance_ha": 199.9,
+        "pct_disturbance_inside_this_permit": 13.5,
+        "distance_deg_from_known_point": 0.00147
+      },
+      {
+        "permit_name": "{'objectid': 1055, 'issuer': 'GUBERNUR', 'prov': 'KEPULAUAN BANGKA BELITUNG', 'idprov': '19', 'kab': 'BANGKA BARAT', 'id",
+        "permit_area_ha": 6861.0,
+        "overlap_with_disturbance_ha": 6.17,
+        "pct_disturbance_inside_this_permit": 0.4,
+        "distance_deg_from_known_point": 0.03854
+      },
+      {
+        "permit_name": "{'objectid': 2063, 'issuer': 'GUBERNUR', 'prov': 'KEPULAUAN BANGKA BELITUNG', 'idprov': '19', 'kab': 'BANGKA BARAT', 'id",
+        "permit_area_ha": 929.9,
+        "overlap_with_disturbance_ha": 0.0,
+        "pct_disturbance_inside_this_permit": 0.0,
+        "distance_deg_from_known_point": 0.04729
+      },
+      {
+        "permit_name": "{'objectid': 1004, 'issuer': 'BUPATI', 'prov': 'KEPULAUAN BANGKA BELITUNG', 'idprov': '19', 'kab': 'BANGKA BARAT', 'idka",
+        "permit_area_ha": 2257.8,
+        "overlap_with_disturbance_ha": 32.31,
+        "pct_disturbance_inside_this_permit": 2.2,
+        "distance_deg_from_known_point": 0.05945
+      },
+      {
+        "permit_name": "{'objectid': 604, 'issuer': 'GUBERNUR', 'prov': 'KEPULAUAN BANGKA BELITUNG', 'idprov': '19', 'kab': 'BANGKA BARAT', 'idk",
+        "permit_area_ha": 25.0,
+        "overlap_with_disturbance_ha": 0.0,
+        "pct_disturbance_inside_this_permit": 0.0,
+        "distance_deg_from_known_point": 0.08429
+      }
+    ]
+  },
+  {
+    "case": "laroenai_morowali",
+    "name": "Desa Laroenai, Bungku Pesisir, Morowali",
+    "sharp_ndvi_loss_pixel_fraction": 0.15934087559287863,
+    "total_disturbed_area_ha": 1853.4,
+    "outside_all_nearby_permits_ha": 1332.0,
+    "permit_overlap_detail": [
+      {
+        "permit_name": "{'objectid': 3292, 'issuer': 'MENTERI', 'prov': 'SULAWESI TENGAH', 'idprov': '72', 'kab': 'MOROWALI', 'idkab': '06', 'is",
+        "permit_area_ha": 84.0,
+        "overlap_with_disturbance_ha": 74.13,
+        "pct_disturbance_inside_this_permit": 4.0,
+        "distance_deg_from_known_point": 0.00498
+      },
+      {
+        "permit_name": "{'objectid': 648, 'issuer': 'BUPATI', 'prov': 'SULAWESI TENGAH', 'idprov': '72', 'kab': 'MOROWALI', 'idkab': '06', 'isla",
+        "permit_area_ha": 1950.7,
+        "overlap_with_disturbance_ha": 207.0,
+        "pct_disturbance_inside_this_permit": 11.2,
+        "distance_deg_from_known_point": 0.00664
+      },
+      {
+        "permit_name": "{'objectid': 4358, 'issuer': 'GUBERNUR', 'prov': 'SULAWESI TENGAH', 'idprov': '72', 'kab': 'MOROWALI', 'idkab': '06', 'i",
+        "permit_area_ha": 93.0,
+        "overlap_with_disturbance_ha": 76.29,
+        "pct_disturbance_inside_this_permit": 4.1,
+        "distance_deg_from_known_point": 0.01127
+      },
+      {
+        "permit_name": "{'objectid': 3939, 'issuer': 'MENTERI', 'prov': 'SULAWESI TENGAH', 'idprov': '72', 'kab': 'MOROWALI', 'idkab': '06', 'is",
+        "permit_area_ha": 99.8,
+        "overlap_with_disturbance_ha": 89.22,
+        "pct_disturbance_inside_this_permit": 4.8,
+        "distance_deg_from_known_point": 0.02244
+      },
+      {
+        "permit_name": "{'objectid': 194, 'issuer': 'BUPATI', 'prov': 'SULAWESI TENGAH', 'idprov': '72', 'kab': 'MOROWALI', 'idkab': '06', 'isla",
+        "permit_area_ha": 197.5,
+        "overlap_with_disturbance_ha": 74.77,
+        "pct_disturbance_inside_this_permit": 4.0,
+        "distance_deg_from_known_point": 0.02323
+      }
+    ]
+  }
+]

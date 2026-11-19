@@ -1,0 +1,32 @@
+[
+  {
+    "case": "kembar_emas_sultra",
+    "name": "PT Kembar Emas Sultra (PT KES), Konawe Utara",
+    "radius_km": 3.0,
+    "disturbed_area_ha": 553.3,
+    "overlap_with_permits_ha": 357.7,
+    "outside_permits_ha": 195.6,
+    "pct_outside_permits": 35.4,
+    "n_permits_nearby": 8
+  },
+  {
+    "case": "das_kampak_bangkabarat",
+    "name": "DAS Kampak, Jebus, Bangka Barat",
+    "radius_km": 3.0,
+    "disturbed_area_ha": 373.9,
+    "overlap_with_permits_ha": 112.8,
+    "outside_permits_ha": 261.1,
+    "pct_outside_permits": 69.8,
+    "n_permits_nearby": 1
+  },
+  {
+    "case": "laroenai_morowali",
+    "name": "Desa Laroenai, Bungku Pesisir, Morowali",
+    "radius_km": 3.0,
+    "disturbed_area_ha": 592.0,
+    "overlap_with_permits_ha": 284.3,
+    "outside_permits_ha": 307.7,
+    "pct_outside_permits": 52.0,
+    "n_permits_nearby": 6
+  }
+]

@@ -1,0 +1,119 @@
+%%{init: {'theme':'base', 'themeVariables': {'primaryColor':'#e8f5e9','primaryBorderColor':'#2e7d32','primaryTextColor':'#1b1b1b','lineColor':'#555','fontSize':'14px'}, 'flowchart':{'curve':'basis','nodeSpacing':30,'rankSpacing':50}}}%%
+%% REVISI 17 Nov 2026 atas diagram workflow teman — perbaikan vs kode/dokumen aktual:
+%% 1) Model = FC-Siam-diff (bukan U-Net/DeepLabV3+)
+%% 2) AI training+inference = GPU lab RTX 3060, BUKAN ECS/cloud (ECS cuma 1vCPU/2GB, nggak ada GPU)
+%% 3) MOMI/MODI dihapus dari alur aktif (API down total, diganti snapshot BIG KSP)
+%% 4) Training corpus eksplisit: MineNetCD256 + Jasansky (bukan "dataset akademik" generik)
+%% 5) Tambah cabang "insufficient observation" setelah QC awan
+%% 6) OBS raw imagery dari GeoTIFF mentah, bukan dari NDVI/NDMI
+%% 7) DataArts/API Gateway/SMN/GaussDB ditandai tegas (ROADMAP, belum jalan) — hanya OBS+ECS yang live
+flowchart TB
+
+    subgraph SRC["SUMBER DATA"]
+        direction TB
+        S1["Sentinel-2\n(Copernicus / STAC Planetary Computer)"]
+        S4["13 ground truth\n(test/validation set, BUKAN training)"]
+        S2["BIG KSP\nizin tambang (snapshot historis 2019-2022)"]
+        S3x["MOMI/MODI — TIDAK DIPAKAI\n(API down total sejak awal proyek,\ndigantikan snapshot BIG KSP)"]
+    end
+
+    subgraph ING["INGESTION — 🔶 Huawei ECS (ringan: 1vCPU/2GB)"]
+        direction TB
+        I1["Download GeoTIFF"]
+        I2["QC awan"]
+        QD{"Cukup bersih?"}
+        I3["NDVI / NDMI"]
+        INS["Status: INSUFFICIENT OBSERVATION\n(skip ke bawah, jangan lanjut ke model)"]
+    end
+
+    subgraph TRAIN["TRAINING CORPUS (bukan live, referensi tetap)"]
+        direction TB
+        T1["MineNetCD256\n71.711 patch (semua versi model)"]
+        T2["Jasansky ekspansi\nIndonesia, 47 lokasi via STAC (v4 saja)"]
+    end
+
+    subgraph AI["AI MODEL — 🔶 GPU LAB LOKAL RTX 3060\n(BUKAN Huawei Cloud — ECS tidak punya GPU)"]
+        direction TB
+        A1["FC-Siam-diff\n(siamese encoder + diff skip + decoder U-Net-style)"]
+        A2["Change mask + confidence"]
+        A3["Polygonize"]
+    end
+
+    subgraph XCHK["CROSS-CHECK — geopandas lokal (bukan GaussDB)"]
+        direction TB
+        X1["Overlay vs izin resmi (BIG KSP)"]
+        X2{"Status"}
+        X2L["HIJAU — legal"]
+        X2Y["KUNING — expired"]
+        X2R["MERAH — flagged (bukan vonis otomatis)"]
+    end
+
+    subgraph STORE["STORAGE — 🔶 Huawei OBS (satu-satunya storage live) — GaussDB & DataArts TIDAK DIPAKAI"]
+        direction TB
+        D1[("OBS\nraw imagery + model checkpoint + evidence")]
+        D2x["❌ GaussDB — TIDAK DIPAKAI\n(cross-check pakai geopandas lokal)"]
+        D3x["❌ DataArts — TIDAK DIPAKAI"]
+    end
+
+    subgraph APIGW["🔷 ROADMAP — belum diajukan (hanya API Gateway, bukan DB/ETL)"]
+        B1[["API Gateway"]]
+    end
+
+    subgraph DASH["DASHBOARD — 🔷 ROADMAP, status resmi: pending/not yet implemented"]
+        direction TB
+        W1["Peta"]
+        W2["Timeline"]
+        W3["Analyst review"]
+        W4["Report PDF"]
+    end
+
+    subgraph ALERT["🔷 ROADMAP — belum diajukan"]
+        N1[["SMN email"]]
+    end
+
+    S1 --> I1 --> I2 --> QD
+    QD -->|ya| I3
+    QD -->|tidak, awan tebal| INS
+    I3 --> A1
+    T1 -.training corpus.-> A1
+    T2 -.training corpus v4 saja.-> A1
+    S4 -.validation, bukan training.-> A1
+
+    A1 --> A2 --> A3 --> X1
+    S2 --> X1
+    X1 --> X2
+    X2 --> X2L
+    X2 --> X2Y
+    X2 --> X2R
+    INS -.flag, tidak masuk cross-check.-> X1
+
+    I1 --> D1
+    X2L --> D1
+    X2Y --> D1
+    X2R --> D1
+    D1 -.roadmap.-> B1
+
+    B1 -.roadmap.-> W1
+    B1 -.roadmap.-> W2
+    B1 -.roadmap.-> W3
+    W3 -.approve, roadmap.-> W4
+    W3 -.approve, roadmap, hanya MERAH/KUNING.-> N1
+
+    classDef src fill:#e3f2fd,stroke:#1565c0
+    classDef notused fill:#eeeeee,stroke:#9e9e9e,stroke-dasharray: 5 5
+    classDef proc fill:#fff3e0,stroke:#ef6c00
+    classDef train fill:#f1f8e9,stroke:#558b2f,stroke-dasharray: 3 3
+    classDef ai fill:#f3e5f5,stroke:#6a1b9a
+    classDef store fill:#eceff1,stroke:#37474f
+    classDef roadmap fill:#fffde7,stroke:#f9a825,stroke-dasharray: 5 5
+    classDef notused fill:#eeeeee,stroke:#9e9e9e,stroke-dasharray: 4 4
+    classDef insuff fill:#ffebee,stroke:#c62828
+    class S1,S2,S4 src
+    class S3x notused
+    class I1,I2,QD,I3 proc
+    class INS insuff
+    class T1,T2 train
+    class A1,A2,A3,X1,X2,X2L,X2Y,X2R ai
+    class D1 store
+    class D2x,D3x notused
+    class B1,W1,W2,W3,W4,N1 roadmap

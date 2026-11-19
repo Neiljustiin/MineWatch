@@ -1,0 +1,379 @@
+{
+  "air_liki_jambi": {
+    "before_date": "2019-11-07",
+    "after_date": "2026-05-19",
+    "before": {
+      "ndvi_mean": 0.6654991389034721,
+      "ndvi_median": 0.6963740864011788,
+      "ndmi_mean": 0.2875173309193558,
+      "ndmi_median": 0.303387334305456,
+      "veg_pixel_frac": 0.9634075912561195,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "after": {
+      "ndvi_mean": 0.8456781189924507,
+      "ndvi_median": 0.8815059527245058,
+      "ndmi_mean": 0.34420318952786283,
+      "ndmi_median": 0.3584863661558574,
+      "veg_pixel_frac": 0.9725755731996771,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "delta_ndvi_mean": 0.1801789800889786,
+    "delta_ndmi_mean": 0.056685858608507056,
+    "veg_loss_percentage_points": -0.9167981943557613,
+    "sharp_ndvi_loss_pixel_fraction": 0.030508801310859167,
+    "sharp_ndvi_gain_pixel_fraction": 0.3910119399028904
+  },
+  "asmin_koalindo_tuhup": {
+    "before_date": "2022-03-26",
+    "after_date": "2025-06-23",
+    "before": {
+      "ndvi_mean": 0.6710636480735097,
+      "ndvi_median": 0.815521628466304,
+      "ndmi_mean": 0.24866599802559947,
+      "ndmi_median": 0.2872147675881125,
+      "veg_pixel_frac": 0.8437502857142857,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 3500000,
+      "total_pixel_count": 3500000
+    },
+    "after": {
+      "ndvi_mean": 0.7544175059989939,
+      "ndvi_median": 0.8573750794503233,
+      "ndmi_mean": 0.2718271114605014,
+      "ndmi_median": 0.29813525049434075,
+      "veg_pixel_frac": 0.9100985152431555,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "delta_ndvi_mean": 0.08335385792548422,
+    "delta_ndmi_mean": 0.02316111343490196,
+    "veg_loss_percentage_points": -6.634822952886987,
+    "sharp_ndvi_loss_pixel_fraction": 0.1417808246685703,
+    "sharp_ndvi_gain_pixel_fraction": 0.2535363879886103
+  },
+  "bumi_morowali_utama": {
+    "before_date": "2020-02-06",
+    "after_date": "2026-11-11",
+    "before": {
+      "ndvi_mean": 0.5066453219102558,
+      "ndvi_median": 0.7654700853828523,
+      "ndmi_mean": 0.23347969323175935,
+      "ndmi_median": 0.293780315875516,
+      "veg_pixel_frac": 0.6643646308991674,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "after": {
+      "ndvi_mean": 0.5341635566924977,
+      "ndvi_median": 0.7017905244588246,
+      "ndmi_mean": 0.11201359037795341,
+      "ndmi_median": 0.14548952859670355,
+      "veg_pixel_frac": 0.7501592388663317,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "delta_ndvi_mean": 0.027518234782241913,
+    "delta_ndmi_mean": -0.12146610285380594,
+    "veg_loss_percentage_points": -8.579460796716432,
+    "sharp_ndvi_loss_pixel_fraction": 0.14263946955184198,
+    "sharp_ndvi_gain_pixel_fraction": 0.2185303437390812
+  },
+  "das_kampak_bangkabarat": {
+    "before_date": "2020-06-11",
+    "after_date": "2026-08-04",
+    "before": {
+      "ndvi_mean": 0.760747362045327,
+      "ndvi_median": 0.8506227880291114,
+      "ndmi_mean": 0.2875317111638833,
+      "ndmi_median": 0.3169135895195565,
+      "veg_pixel_frac": 0.9524042458342872,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "after": {
+      "ndvi_mean": 0.7316603182090669,
+      "ndvi_median": 0.8226696979093499,
+      "ndmi_mean": 0.23824891240252666,
+      "ndmi_median": 0.2705141876181301,
+      "veg_pixel_frac": 0.9458242468784764,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "delta_ndvi_mean": -0.02908704383626015,
+    "delta_ndmi_mean": -0.04928279876135666,
+    "veg_loss_percentage_points": 0.657999895581074,
+    "sharp_ndvi_loss_pixel_fraction": 0.12773647875275607,
+    "sharp_ndvi_gain_pixel_fraction": 0.08511909782045567
+  },
+  "daya_sumber_mining": {
+    "before_date": "2023-09-28",
+    "after_date": "2026-10-07",
+    "before": {
+      "ndvi_mean": 0.6238327507698949,
+      "ndvi_median": 0.7657983235072129,
+      "ndmi_mean": 0.2178745290087301,
+      "ndmi_median": 0.26508352382892414,
+      "veg_pixel_frac": 0.8174714285714286,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 3500000,
+      "total_pixel_count": 3500000
+    },
+    "after": {
+      "ndvi_mean": 0.6559183353734435,
+      "ndvi_median": 0.7331846067633472,
+      "ndmi_mean": 0.20138806519878907,
+      "ndmi_median": 0.22796479371676615,
+      "veg_pixel_frac": 0.9070925714285715,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 3500000,
+      "total_pixel_count": 3500000
+    },
+    "delta_ndvi_mean": 0.0320855846035486,
+    "delta_ndmi_mean": -0.016486463809941038,
+    "veg_loss_percentage_points": -8.962114285714284,
+    "sharp_ndvi_loss_pixel_fraction": 0.12039571428571429,
+    "sharp_ndvi_gain_pixel_fraction": 0.20652514285714285
+  },
+  "dusun_nadi_bangkatengah": {
+    "before_date": "2019-04-25",
+    "after_date": "2026-08-11",
+    "before": {
+      "ndvi_mean": 0.44634840683459365,
+      "ndvi_median": 0.5865578734611979,
+      "ndmi_mean": 0.23720872551810965,
+      "ndmi_median": 0.2226640378094131,
+      "veg_pixel_frac": 0.6493162857142857,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 3500000,
+      "total_pixel_count": 3500000
+    },
+    "after": {
+      "ndvi_mean": 0.5066129576811857,
+      "ndvi_median": 0.6298566003120889,
+      "ndmi_mean": 0.1911091941345936,
+      "ndmi_median": 0.20206115897386773,
+      "veg_pixel_frac": 0.7330062857142857,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 3500000,
+      "total_pixel_count": 3500000
+    },
+    "delta_ndvi_mean": 0.0602645508465921,
+    "delta_ndmi_mean": -0.04609953138351605,
+    "veg_loss_percentage_points": -8.369000000000003,
+    "sharp_ndvi_loss_pixel_fraction": 0.17430628571428572,
+    "sharp_ndvi_gain_pixel_fraction": 0.2795371428571429
+  },
+  "kembar_emas_sultra": {
+    "before_date": "2018-09-19",
+    "after_date": "2026-11-11",
+    "before": {
+      "ndvi_mean": 0.35753244172436704,
+      "ndvi_median": 0.15803679876926371,
+      "ndmi_mean": 0.12291802689541623,
+      "ndmi_median": 0.12184412719885386,
+      "veg_pixel_frac": 0.47665152592199905,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "after": {
+      "ndvi_mean": 0.23562559450966256,
+      "ndvi_median": 0.07790331055971153,
+      "ndmi_mean": -0.027369731442920195,
+      "ndmi_median": -0.04533762057148913,
+      "veg_pixel_frac": 0.36913778077647524,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "delta_ndvi_mean": -0.12190684721470449,
+    "delta_ndmi_mean": -0.1502877583383364,
+    "veg_loss_percentage_points": 10.751374514552381,
+    "sharp_ndvi_loss_pixel_fraction": 0.22428944927047315,
+    "sharp_ndvi_gain_pixel_fraction": 0.05365606814539934
+  },
+  "kristalin_eka_lestari_papua": {
+    "before_date": "2018-09-19",
+    "after_date": "2026-08-18",
+    "before": {
+      "ndvi_mean": 0.6897967902004332,
+      "ndvi_median": 0.811721991659143,
+      "ndmi_mean": 0.3649332036487499,
+      "ndmi_median": 0.40877273586095586,
+      "veg_pixel_frac": 0.8619637987606277,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "after": {
+      "ndvi_mean": 0.6315447124711583,
+      "ndvi_median": 0.8138829057757058,
+      "ndmi_mean": 0.35197507809982836,
+      "ndmi_median": 0.39112779178025203,
+      "veg_pixel_frac": 0.811628,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 3500000,
+      "total_pixel_count": 3500000
+    },
+    "delta_ndvi_mean": -0.058252077729274876,
+    "delta_ndmi_mean": -0.012958125548921562,
+    "veg_loss_percentage_points": 5.033579876062766,
+    "sharp_ndvi_loss_pixel_fraction": 0.2397000767077515,
+    "sharp_ndvi_gain_pixel_fraction": 0.19669875540669166
+  },
+  "laroenai_morowali": {
+    "before_date": "2021-03-17",
+    "after_date": "2026-11-11",
+    "before": {
+      "ndvi_mean": 0.2347147157805943,
+      "ndvi_median": 0.11274033070771736,
+      "ndmi_mean": 0.14383524952918544,
+      "ndmi_median": 0.20913150935984376,
+      "veg_pixel_frac": 0.45438334950489323,
+      "nodata_frac": 8.032225287854874e-07,
+      "valid_pixel_count": 1244984,
+      "total_pixel_count": 1244985
+    },
+    "after": {
+      "ndvi_mean": 0.28407644822624684,
+      "ndvi_median": 0.15556925605448163,
+      "ndmi_mean": 0.050713240460502976,
+      "ndmi_median": 0.023912548388997368,
+      "veg_pixel_frac": 0.4634104025349703,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "delta_ndvi_mean": 0.049361732445652534,
+    "delta_ndmi_mean": -0.09312200906868247,
+    "veg_loss_percentage_points": -0.9027053030077059,
+    "sharp_ndvi_loss_pixel_fraction": 0.15934100357916248,
+    "sharp_ndvi_gain_pixel_fraction": 0.25681293896146457
+  },
+  "masempo_dalle_konut": {
+    "before_date": "2019-09-19",
+    "after_date": "2025-09-12",
+    "before": {
+      "ndvi_mean": 0.5182838503560909,
+      "ndvi_median": 0.669290668453713,
+      "ndmi_mean": 0.16117578627982648,
+      "ndmi_median": 0.18102597828173084,
+      "veg_pixel_frac": 0.7051362064603188,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "after": {
+      "ndvi_mean": 0.4999477847035864,
+      "ndvi_median": 0.7030606237929575,
+      "ndmi_mean": 0.1445538172020929,
+      "ndmi_median": 0.20654226368414577,
+      "veg_pixel_frac": 0.6479459873275979,
+      "nodata_frac": 0.0022152877343903743,
+      "valid_pixel_count": 1242227,
+      "total_pixel_count": 1244985
+    },
+    "delta_ndvi_mean": -0.018336065652504507,
+    "delta_ndmi_mean": -0.016621969077733584,
+    "veg_loss_percentage_points": 5.719021913272093,
+    "sharp_ndvi_loss_pixel_fraction": 0.2248735537063677,
+    "sharp_ndvi_gain_pixel_fraction": 0.18602719148754615
+  },
+  "muara_hemat_jambi": {
+    "before_date": "2017-08-09",
+    "after_date": "2026-07-23",
+    "before": {
+      "ndvi_mean": 0.8569669930025513,
+      "ndvi_median": 0.8851114491406471,
+      "ndmi_mean": 0.3014058096964693,
+      "ndmi_median": 0.3224159786110379,
+      "veg_pixel_frac": 0.9966593975027812,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "after": {
+      "ndvi_mean": 0.7701666360034427,
+      "ndvi_median": 0.8437143418908631,
+      "ndmi_mean": 0.2778576004981579,
+      "ndmi_median": 0.3063187233818396,
+      "veg_pixel_frac": 0.9485784969296819,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "delta_ndvi_mean": -0.0868003569991086,
+    "delta_ndmi_mean": -0.02354820919831141,
+    "veg_loss_percentage_points": 4.808090057309933,
+    "sharp_ndvi_loss_pixel_fraction": 0.14024586641606124,
+    "sharp_ndvi_gain_pixel_fraction": 0.022219544813792937
+  },
+  "pangkalan_jambu": {
+    "before_date": "2016-03-17",
+    "after_date": "2026-05-26",
+    "before": {
+      "ndvi_mean": 0.8032993849479855,
+      "ndvi_median": 0.8624150866439007,
+      "ndmi_mean": 0.25500940990718146,
+      "ndmi_median": 0.2738045795532906,
+      "veg_pixel_frac": 0.9535480347152777,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "after": {
+      "ndvi_mean": 0.8392717614224033,
+      "ndvi_median": 0.8959009917977749,
+      "ndmi_mean": 0.315951794331322,
+      "ndmi_median": 0.3374952705131481,
+      "veg_pixel_frac": 0.9534323706711326,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 1244985,
+      "total_pixel_count": 1244985
+    },
+    "delta_ndvi_mean": 0.035972376474417866,
+    "delta_ndmi_mean": 0.06094238442414052,
+    "veg_loss_percentage_points": 0.01156640441450918,
+    "sharp_ndvi_loss_pixel_fraction": 0.04557966561846127,
+    "sharp_ndvi_gain_pixel_fraction": 0.06682891761748133
+  },
+  "singlurus_pratama": {
+    "before_date": "2020-01-23",
+    "after_date": "2024-04-16",
+    "before": {
+      "ndvi_mean": 0.5780682896994401,
+      "ndvi_median": 0.7276941111950729,
+      "ndmi_mean": 0.18067191088745332,
+      "ndmi_median": 0.2084799731800324,
+      "veg_pixel_frac": 0.7591513246306753,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 2105870,
+      "total_pixel_count": 2105870
+    },
+    "after": {
+      "ndvi_mean": 0.5948427242971374,
+      "ndvi_median": 0.724482987236837,
+      "ndmi_mean": 0.1401900079881224,
+      "ndmi_median": 0.18195252672381698,
+      "veg_pixel_frac": 0.7982482299477176,
+      "nodata_frac": 0.0,
+      "valid_pixel_count": 2105870,
+      "total_pixel_count": 2105870
+    },
+    "delta_ndvi_mean": 0.01677443459769723,
+    "delta_ndmi_mean": -0.04048190289933093,
+    "veg_loss_percentage_points": -3.909690531704235,
+    "sharp_ndvi_loss_pixel_fraction": 0.1994605554948786,
+    "sharp_ndvi_gain_pixel_fraction": 0.22473467023130583
+  }
+}
