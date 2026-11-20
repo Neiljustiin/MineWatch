@@ -118,8 +118,12 @@ arsitektur hasil tebakan sendiri (`scripts/model.py`).
 > vs 0.438; Indonesia IoU 0.233 vs 0.360) — **tidak dipakai**. **v5b (fine-tune dari v4, tanpa
 > negative patches) menang di split Indonesia** (IoU 0.384 vs 0.360, F1 0.555 vs 0.530, precision
 > 0.625) tapi sedikit kalah di split test global (IoU 0.414 vs 0.438) — trade-off recall→precision
-> (recall 0.500), cocok buat workflow "kurangi false positive ke antrian analis". **Dashboard masih
-> jalanin checkpoint v4** — promosi ke v5b butuh re-run export 13 kasus, BELUM dilakukan.
+> (recall 0.500), cocok buat workflow "kurangi false positive ke antrian analis". **PROMOTED 20 Nov
+> 2026**: dashboard sekarang jalanin checkpoint v5b (`production_v5_finetune_tversky`) — 13-case
+> export sudah di-re-run, data bundle live diganti dari NDVI-threshold placeholder langsung ke
+> v5b (lihat `dashboard-huawei/data_model_v5/`, dideploy ke `dashboard-huawei/data/` 20 Nov 2026).
+> Keputusan diambil oleh Syafa (tim), sadar trade-off di atas, karena precision Indonesia-split
+> lebih relevan untuk use-case ini.
 
 Teknik training (semua versi, implementasi di `train_production.py`):
 mixed precision (AMP, autocast+GradScaler — RTX 3060 Ampere tensor core), `pin_memory=True`,
@@ -137,12 +141,12 @@ Command: `python3 evaluate.py --checkpoint <path/best_model.pt> --split <test|ja
 | v1 | 0.383 / 0.554 / — / — | N/A (belum dievaluasi di split ini) |
 | v2 | 0.411 / 0.582 / — / — | 0.112 / 0.202 / — / — |
 | v3 | 0.430 / 0.602 / — / — | 0.175 / 0.297 / — / — |
-| v4 (dipakai dashboard) | **0.438 / 0.609** / — / — | **0.360 / 0.530** / — / — |
+| v4 (dipakai dashboard sampai 19 Nov 2026, retired) | **0.438 / 0.609** / — / — | **0.360 / 0.530** / — / — |
 | v5a (dari scratch, TIDAK dipakai) | 0.411 / 0.582 / 0.542 / 0.629 | 0.233 / 0.378 / 0.328 / 0.446 |
-| v5b (fine-tune dari v4) | 0.414 / 0.585 / 0.638 / 0.540 *(full test set, 19.355 patch)* | **0.384 / 0.555 / 0.625 / 0.500** |
+| v5b (fine-tune dari v4, dipakai dashboard sejak 20 Nov 2026) | 0.414 / 0.585 / 0.638 / 0.540 *(full test set, 19.355 patch)* | **0.384 / 0.555 / 0.625 / 0.500** |
 
-Checkpoint yang dipakai dashboard saat ini (TIDAK berubah): `checkpoints/production_v4_base64_reg_jasansky/best_model.pt`.
-Checkpoint v5b (belum dipromosikan ke dashboard): `checkpoints/production_v5_finetune_tversky/best_model.pt` (lab, belum disinkron ke repo lokal/`/home/ubuntu`).
+Checkpoint yang dipakai dashboard saat ini (berubah 20 Nov 2026): `checkpoints/production_v5_finetune_tversky/best_model.pt` (v5b, fine-tune dari v4, promoted — lihat catatan status v5 di atas).
+Checkpoint v4 (sebelumnya dipakai, sekarang di-retire dari dashboard live, backup data tersimpan di `dashboard-huawei/data_model_v4_backup_20261119_052545/`): `checkpoints/production_v4_base64_reg_jasansky/best_model.pt`.
 
 > Sel "—" pada precision/recall v1-v4 = angka itu tidak pernah dicatat terpisah saat run asli
 > (cuma IoU/F1 yang dilaporkan ke Entry Form) — bukan nol, cuma belum ada datanya. Jangan diisi
@@ -218,7 +222,7 @@ pip install -r requirements.txt   # [TODO: pastikan file ini ada & lengkap]
 # 2. Siapkan dataset (path exact, lihat §2.1)
 #    data/training_datasets/minenetcd256/, jasansky_patches/, negative_patches/
 
-# 3. Training (v4, konfigurasi final yang dipakai dashboard)
+# 3. Training (v4, baseline recipe — v5b fine-tune dari checkpoint ini dipakai dashboard sekarang)
 MINEWATCH_INCLUDE_JASANSKY=1 python3 scripts/train_production.py \
   --base-ch 64 --dropout 0.3 --loss focal_dice --epochs 50 --batch-size 8
 
