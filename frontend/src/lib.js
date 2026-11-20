@@ -1,5 +1,15 @@
 // Shared constants + helpers. Colours / marker shapes are taken 1:1 from Main.dc.html & Case.dc.html.
 
+// Derive a short "FC-SIAM-DIFF V5"-style tag (and the full backend sentence) from
+// meta.detection_method, so this label never drifts out of sync with the data
+// actually being served (it previously hardcoded "v4" in several places).
+export function modelLabel(detectionMethod) {
+  const full = detectionMethod || 'FC-Siam-diff model (checkpoint unknown).';
+  const vMatch = full.match(/_v(\d+)[_.]/i) || full.match(/\bv(\d+)\b/i);
+  const tag = vMatch ? `FC-Siam-diff v${vMatch[1]}` : 'FC-Siam-diff';
+  return { tag, tagUpper: tag.toUpperCase(), full };
+}
+
 export const ST = {
   HIGH: { fg: '#A3241C', bg: '#FBE8E5', dot: '#C8322A', map: '#E5483D', bar: '#C8322A', rad: '1px', rot: '45deg', label: 'No Matching Permit', short: 'No Match' },
   MEDIUM: { fg: '#6E4A00', bg: '#FBF0D6', dot: '#C98A12', map: '#E8A92E', bar: '#D99A1E', rad: '2px', rot: '0deg', label: 'Permit Expired', short: 'Expired' },

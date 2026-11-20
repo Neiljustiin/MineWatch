@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { api, ST, STATUSES, COM, QUALITY, fmtDate, fmtDateTime, ha, pct, monthIndex, monthName, initials } from './lib.js';
+import { api, ST, STATUSES, COM, QUALITY, fmtDate, fmtDateTime, ha, pct, monthIndex, monthName, initials, modelLabel } from './lib.js';
 import MapPanel from './MapPanel.jsx';
 import CasePanel from './CasePanel.jsx';
 import PermitsView from './PermitsView.jsx';
@@ -436,7 +436,7 @@ export default function App() {
             </section>
 
             <footer style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: '6px 16px', fontSize: 11 }} className="muted">
-              <span>Imagery: Copernicus Sentinel-2 L2A · Permits: BIG Kebijakan Satu Peta IUP/IUPK ({meta.permit_count.toLocaleString('en-US')} polygons, ~2022) · Detection: {meta.checkpoint ? 'FC-Siam-diff v4' : 'NDVI threshold'}</span>
+              <span>Imagery: Copernicus Sentinel-2 L2A · Permits: BIG Kebijakan Satu Peta IUP/IUPK ({meta.permit_count.toLocaleString('en-US')} polygons, ~2022) · Detection: {meta.checkpoint ? modelLabel(meta.detection_method).tag : 'NDVI threshold'}</span>
               <span>13 real ground-truth pilot cases · All decisions require analyst sign-off · Alert dispatch is a MOCK</span>
             </footer>
           </main>
@@ -447,7 +447,7 @@ export default function App() {
         <div className="overlay">
           <button type="button" className="scrim" onClick={closeCase} aria-label="Close case panel" />
           <aside aria-label="Case detail" className="mw-scroll">
-            <CasePanel id={selectedId} analyst={analyst} onClose={closeCase}
+            <CasePanel id={selectedId} analyst={analyst} meta={meta} onClose={closeCase}
               onNavigate={(id) => { setSel(id); setCallout(id); go(route.view, id); }} onChanged={reload} />
           </aside>
         </div>

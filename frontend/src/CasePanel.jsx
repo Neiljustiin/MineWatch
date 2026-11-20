@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { api, ST, PST, COM_LONG, QUALITY, DECISIONS, fmtDate, fmtDateTime, dms, ha, pct } from './lib.js';
+import { api, ST, PST, COM_LONG, QUALITY, DECISIONS, fmtDate, fmtDateTime, dms, ha, pct, modelLabel } from './lib.js';
 import { StatusPill, QualityChip } from './ui.jsx';
 
 const sendIcon = 'M4 12 L20 4 L14 20 L11 13 Z M11 13 L20 4';
@@ -40,7 +40,7 @@ function circlePath(lon, lat, km, P) {
   return d + 'Z';
 }
 
-export default function CasePanel({ id, analyst, onEditAnalyst, onClose, onNavigate, onChanged }) {
+export default function CasePanel({ id, analyst, meta, onEditAnalyst, onClose, onNavigate, onChanged }) {
   const [c, setC] = useState(null);
   const [err, setErr] = useState(null);
   const [geo, setGeo] = useState({ dist: null, permits: null });
@@ -186,7 +186,7 @@ export default function CasePanel({ id, analyst, onEditAnalyst, onClose, onNavig
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 7, height: 24, padding: '0 8px 0 4px', border: '1px solid #D8D8D3', borderRadius: 3, fontSize: 12, fontWeight: 500 }}>
               <span className="mono" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', minWidth: 18, height: 16, padding: '0 3px', background: '#17181A', color: '#FFFFFF', borderRadius: 2, fontSize: 10, fontWeight: 600 }}>{c.com}</span>{COM_LONG[c.com]}
             </span>
-            <span className="tnum" title={n ? "Share of frame pixels with ΔNDVI < −0.2 (not a model confidence)" : "Share of frame pixels flagged as changed by the FC-Siam-diff v4 model (threshold 0.5)"} style={{ display: 'inline-flex', alignItems: 'center', height: 24, padding: '0 8px', border: '1px solid #D8D8D3', borderRadius: 3, fontSize: 12 }}>
+            <span className="tnum" title={n ? "Share of frame pixels with ΔNDVI < −0.2 (not a model confidence)" : `Share of frame pixels flagged as changed by the ${modelLabel(meta && meta.detection_method).tag} model (threshold 0.5)`} style={{ display: 'inline-flex', alignItems: 'center', height: 24, padding: '0 8px', border: '1px solid #D8D8D3', borderRadius: 3, fontSize: 12 }}>
               <b style={{ fontWeight: 600, marginRight: 4 }}>{pct(n ? n.sharp_ndvi_loss_pixel_fraction : modelFrac)}</b> {n ? 'NDVI loss' : 'model flagged'}
             </span>
           </div>
@@ -215,7 +215,13 @@ export default function CasePanel({ id, analyst, onEditAnalyst, onClose, onNavig
           <div>
             <span className="eyebrow" style={{ letterSpacing: '0.07em' }}>SENSOR · METHOD</span>
             <span style={{ fontSize: 12.5, fontWeight: 500 }}>Sentinel-2 L2A, 10 m</span>
-            <span className="muted" style={{ fontSize: 11 }}>NDVI threshold ΔNDVI &lt; −0.2 · not an AI model</span>
+            <span className="muted" style={{ fontSize: 11 }}>
+              {cc && cc.method
+                ? (/ndvi/i.test(cc.method) && !/siam/i.test(cc.method)
+                    ? 'NDVI threshold ΔNDVI < −0.2 · not an AI model'
+                    : 'FC-Siam-diff AI model (Siamese change detection) · not NDVI')
+                : 'method not recorded'}
+            </span>
           </div>
         </section>
 
@@ -301,7 +307,7 @@ export default function CasePanel({ id, analyst, onEditAnalyst, onClose, onNavig
 
         {/* VEGETATION INDICES (NDVI run) or MODEL DETECTION (AI model run) */}
         <section aria-label="Detection signal" style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <h2 className="eyebrow" style={{ margin: 0 }}>{n ? 'VEGETATION INDICES · WHOLE FRAME, BEFORE → AFTER' : 'AI MODEL DETECTION · FC-SIAM-DIFF V4'}</h2>
+          <h2 className="eyebrow" style={{ margin: 0 }}>{n ? 'VEGETATION INDICES · WHOLE FRAME, BEFORE → AFTER' : `AI MODEL DETECTION · ${modelLabel(meta && meta.detection_method).tagUpper}`}</h2>
           {n ? (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: 8 }}>
             {[
@@ -331,8 +337,8 @@ export default function CasePanel({ id, analyst, onEditAnalyst, onClose, onNavig
               <span className="mono" style={{ fontWeight: 600, fontSize: 12, minWidth: 48, textAlign: 'right' }}>{pct(modelFrac)}</span>
             </div>
             <span className="muted" style={{ fontSize: 11 }}>
-              Share of frame pixels flagged "changed" by the model (checkpoint production_v4_base64_reg_jasansky, threshold 0.5).
-              No NDVI/NDMI computed in this run — detection is the AI model's own output, not a vegetation-index proxy.
+              Share of frame pixels flagged "changed" by the {modelLabel(meta && meta.detection_method).full}
+              {' '}No NDVI/NDMI computed in this run — detection is the AI model's own output, not a vegetation-index proxy.
             </span>
           </div>
           )}
@@ -450,7 +456,7 @@ export default function CasePanel({ id, analyst, onEditAnalyst, onClose, onNavig
                   </label>
                   <label style={{ display: 'flex', alignItems: 'flex-start', gap: 9, fontSize: 12, cursor: 'pointer' }}>
                     <input type="checkbox" checked={form.ack} onChange={(e) => setForm({ ...form, ack: e.target.checked })} style={{ width: 16, height: 16, margin: '1px 0 0', accentColor: '#17181A' }} />
-                    <span><b style={{ fontWeight: 600 }}>2 · I have reviewed</b> the before/after imagery, NDVI change and permit overlap for {c.id}, and take responsibility for this decision.</span>
+                    <span><b style={{ fontWeight: 600 }}>2 · I have reviewed</b> the before/after imagery, detected change and permit overlap for {c.id}, and take responsibility for this decision.</span>
                   </label>
                 </div>
               </div>
